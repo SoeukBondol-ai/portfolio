@@ -1,0 +1,25 @@
+---
+interface Props { title?: string; desc?: string; }
+const { title = 'Soeuk Bondol — Data Scientist', desc = 'Data Scientist. ML engineer. Building intelligent systems from Cambodia.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content={desc}/>
+  <title>{title}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+</head>
+<body>
+  <slot/>
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    }), { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
+<style is:global>@import '../styles/global.css';</style>

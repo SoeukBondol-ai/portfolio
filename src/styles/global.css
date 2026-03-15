@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:       #06070a;
+  --bg2:      #0b0d12;
+  --surface:  #0f1118;
+  --lift:     #141720;
+  --border:   #1d2030;
+  --border2:  #252840;
+  --ink:      #e8eaf2;
+  --muted:    #525670;
+  --dim:      #2a2d40;
+  --acid:     #c8ff57;
+  --cyan:     #38d9f5;
+  --violet:   #8b5cf6;
+  --amber:    #f59e0b;
+  --red:      #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.4;
+}
+
+/* dot grid */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+::selection { background: var(--acid); color: #000; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.font-display { font-family: 'Bebas Neue', sans-serif; }
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+/* reveal */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.on { opacity: 1; transform: none; }
+
+/* section label */
+.sec-eye {
+  display: flex; align-items: center; gap: 0.9rem; margin-bottom: 3.5rem;
+}
+.sec-eye-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+  color: var(--acid); letter-spacing: 0.12em;
+}
+.sec-eye-line { flex: 1; height: 1px; background: var(--border); max-width: 48px; }
+.sec-eye-txt  {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+  color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase;
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes spin   { to { transform: rotate(360deg); } }
+@keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes scanH  { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }

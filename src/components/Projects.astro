@@ -1,0 +1,280 @@
+---
+const projects = [
+  {
+    num: '001',
+    title: 'Khmer Number Recognition',
+    short: 'OCR · Computer Vision',
+    desc: 'A deep learning model for recognising handwritten Khmer numerals. Trained a custom CNN on Khmer digit datasets — tackling one of the hardest OCR challenges in Southeast Asian language processing.',
+    detail: 'Custom CNN architecture · Data augmentation pipeline · Evaluated on real-world Khmer handwriting samples.',
+    tags: ['Python', 'Deep Learning', 'CNN', 'OpenCV', 'OCR', 'Khmer NLP'],
+    github: 'https://github.com/SoeukBondol-ai/khmer-number-recognition',
+    accent: 'acid',
+    icon: '🧠',
+    type: 'ML / Computer Vision',
+  },
+  {
+    num: '002',
+    title: 'FastAPI Auth Service',
+    short: 'Backend · DevOps',
+    desc: 'Production-ready authentication microservice built with FastAPI. JWT-based access and refresh token flow, bcrypt password hashing, and full OpenAPI documentation. Ready to drop into any Python backend.',
+    detail: 'JWT · Refresh token rotation · bcrypt · SQLAlchemy · Docker-ready · OpenAPI docs.',
+    tags: ['Python', 'FastAPI', 'JWT', 'Docker', 'PostgreSQL', 'REST API'],
+    github: 'https://github.com/SoeukBondol-ai/fastapi-auth-service',
+    accent: 'cyan',
+    icon: '🔐',
+    type: 'Backend / DevOps',
+  },
+  {
+    num: '003',
+    title: 'Grabbit',
+    short: 'Tooling · Automation',
+    desc: 'A fast command-line scraping and data-grabbing tool. Built for developers who need to pull structured data quickly without writing boilerplate. Clean CLI, clean output.',
+    detail: 'CLI-first design · Structured output (JSON/CSV) · Configurable rules · Lightweight dependency tree.',
+    tags: ['Python', 'CLI', 'Scraping', 'Automation', 'Data Pipeline'],
+    github: 'https://github.com/SoeukBondol-ai/grabbit',
+    accent: 'violet',
+    icon: '⚡',
+    type: 'Tooling / Automation',
+  },
+  {
+    num: '004',
+    title: 'Coming Soon',
+    short: 'In Development',
+    desc: 'The next project is brewing. Something at the intersection of data engineering and ML infrastructure — watch this space.',
+    detail: null,
+    tags: ['Python', 'ML', 'Data Engineering'],
+    github: null,
+    accent: 'dim',
+    icon: '⟳',
+    type: 'TBD',
+  },
+];
+
+const accentMap: Record<string,string> = {
+  acid:   '#c8ff57',
+  cyan:   '#38d9f5',
+  violet: '#8b5cf6',
+  dim:    '#2a2d40',
+};
+---
+
+<section class="projects" id="projects">
+  <div class="projects-inner">
+    <div class="sec-eye reveal">
+      <span class="sec-eye-num">02</span>
+      <div class="sec-eye-line"></div>
+      <span class="sec-eye-txt">Projects</span>
+    </div>
+
+    <div class="ph reveal">
+      <h2 class="ph-title">THINGS I'VE<br/><em>SHIPPED.</em></h2>
+      <p class="ph-sub">
+        From Khmer NLP to auth microservices —<br/>
+        real problems, real code, real impact.
+      </p>
+    </div>
+
+    <!-- FEATURED — first project big -->
+    {projects.slice(0,1).map(p => (
+      <article class="card-featured reveal" style={`--ac: ${accentMap[p.accent]}`}>
+        <div class="cf-left">
+          <div class="cf-top">
+            <span class="cf-num font-mono">{p.num}</span>
+            <span class="cf-type font-mono">{p.type}</span>
+          </div>
+          <div class="cf-icon">{p.icon}</div>
+          <h3 class="cf-title">{p.title}</h3>
+          <p class="cf-desc">{p.desc}</p>
+          {p.detail && <p class="cf-detail font-mono">{p.detail}</p>}
+          <div class="cf-tags">
+            {p.tags.map(t => <span class="ptag">{t}</span>)}
+          </div>
+          {p.github && (
+            <a href={p.github} target="_blank" rel="noopener" class="cf-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          )}
+        </div>
+
+        <!-- right: decorative code block -->
+        <div class="cf-right">
+          <div class="code-win">
+            <div class="cw-bar">
+              <span class="cw-d r"></span><span class="cw-d y"></span><span class="cw-d g"></span>
+              <span class="cw-title font-mono">khmer_recognition.py</span>
+            </div>
+            <pre class="cw-body font-mono"><code><span class="ck">import</span> torch
+<span class="ck">import</span> torch.nn <span class="ck">as</span> nn
+
+<span class="cc"># Khmer digit CNN</span>
+<span class="ck">class</span> <span class="cf2">KhmerCNN</span>(nn.Module):
+    <span class="ck">def</span> <span class="cf2">__init__</span>(<span class="cv">self</span>):
+        <span class="cv">super</span>().__init__()
+        <span class="cv">self</span>.conv = nn.Sequential(
+            nn.Conv2d(<span class="cn">1</span>, <span class="cn">32</span>, <span class="cn">3</span>),
+            nn.ReLU(),
+            nn.MaxPool2d(<span class="cn">2</span>),
+        )
+        <span class="cv">self</span>.fc = nn.Linear(<span class="cn">32</span>*<span class="cn">13</span>*<span class="cn">13</span>, <span class="cn">10</span>)
+
+    <span class="ck">def</span> <span class="cf2">forward</span>(<span class="cv">self</span>, x):
+        x = <span class="cv">self</span>.conv(x)
+        <span class="ck">return</span> <span class="cv">self</span>.fc(x.flatten(<span class="cn">1</span>))
+
+<span class="cc"># accuracy: 97.4%</span></code></pre>
+          </div>
+        </div>
+      </article>
+    ))}
+
+    <!-- 3-col grid for the rest -->
+    <div class="cards-grid">
+      {projects.slice(1).map((p, i) => (
+        <article class={`card-sm reveal ${p.accent === 'dim' ? 'card-dim' : ''}`} style={`--ac:${accentMap[p.accent]};transition-delay:${i*0.08}s`}>
+          <div class="cs-top">
+            <span class="cs-num font-mono">{p.num}</span>
+            <span class="cs-icon">{p.icon}</span>
+          </div>
+          <span class="cs-type font-mono">{p.type}</span>
+          <h3 class="cs-title">{p.title}</h3>
+          <p class="cs-desc">{p.desc}</p>
+          <div class="cs-tags">
+            {p.tags.map(t => <span class="ptag">{t}</span>)}
+          </div>
+          {p.github ? (
+            <a href={p.github} target="_blank" rel="noopener" class="cs-link">
+              GitHub →
+            </a>
+          ) : (
+            <span class="cs-wip font-mono">In Progress…</span>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.projects { position:relative; z-index:1; padding: 5rem 1.5rem; border-top: 1px solid var(--border); }
+@media(min-width:640px){ .projects{ padding: 7rem 2.5rem; } }
+.projects-inner { max-width: 1200px; margin: 0 auto; }
+
+.ph { margin-bottom: 3.5rem; }
+.ph-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.9; margin-bottom: 1rem;
+}
+.ph-title em { color: var(--acid); font-style: normal; }
+.ph-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.75; }
+
+/* FEATURED */
+.card-featured {
+  display: grid; grid-template-columns: 1fr;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 12px; overflow: hidden; margin-bottom: 1.25rem;
+  transition: border-color 0.3s;
+  border-left: 3px solid var(--ac);
+}
+@media(min-width:760px){ .card-featured{ grid-template-columns: 1fr 1fr; } }
+.card-featured:hover { border-color: color-mix(in srgb, var(--ac) 40%, var(--border2)); }
+
+.cf-left { padding: 2.5rem; display: flex; flex-direction: column; }
+.cf-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.cf-num  { font-size: 0.6rem; color: var(--ac); letter-spacing: 0.1em; }
+.cf-type { font-size: 0.56rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.cf-icon { font-size: 2rem; margin-bottom: 1rem; }
+.cf-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 0.95; color: var(--ac); margin-bottom: 0.9rem;
+}
+.cf-desc   { font-size: 0.78rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; flex:1; }
+.cf-detail { font-size: 0.6rem; color: var(--muted); opacity: 0.6; line-height: 1.6; margin-bottom: 1.25rem; }
+.cf-tags   { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.75rem; }
+.cf-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.63rem;
+  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+  color: var(--ac); padding: 0.55rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--ac) 30%, transparent);
+  border-radius: 4px; background: color-mix(in srgb, var(--ac) 6%, transparent);
+  transition: background 0.2s; align-self: flex-start;
+}
+.cf-link:hover { background: color-mix(in srgb, var(--ac) 12%, transparent); }
+
+/* code window */
+.cf-right {
+  background: var(--bg); border-left: 1px solid var(--border);
+  padding: 0; display: flex; flex-direction: column;
+}
+@media(max-width:759px){ .cf-right{ border-left:none; border-top:1px solid var(--border); } }
+.code-win { flex:1; display:flex; flex-direction:column; }
+.cw-bar {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.6rem 1rem; border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+.cw-d { width:9px; height:9px; border-radius:50%; }
+.cw-d.r{background:#ff5f57;} .cw-d.y{background:#febc2e;} .cw-d.g{background:#28c840;}
+.cw-title { font-size:0.58rem; color:var(--muted); margin-left: 0.4rem; }
+.cw-body {
+  flex:1; padding:1.5rem; font-size:0.67rem; line-height:1.8;
+  color: #8892b0; overflow: auto;
+}
+.ck  { color: #c792ea; }
+.cf2 { color: var(--acid); }
+.cv  { color: var(--cyan); }
+.cn  { color: #f78c6c; }
+.cc  { color: #546e7a; font-style: italic; }
+
+/* CARD GRID */
+.cards-grid {
+  display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+}
+@media(min-width:640px)  { .cards-grid{ grid-template-columns: 1fr 1fr; } }
+@media(min-width:1000px) { .cards-grid{ grid-template-columns: repeat(3,1fr); } }
+
+.card-sm {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 10px;
+  padding: 2rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
+  transition: border-color 0.25s, background 0.25s;
+  border-top: 2px solid var(--ac);
+}
+.card-sm::before {
+  content:''; position:absolute; inset:0; border-radius:10px; opacity:0; pointer-events:none;
+  background: radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--ac) 8%, transparent), transparent 60%);
+  transition: opacity 0.3s;
+}
+.card-sm:hover::before { opacity:1; }
+.card-sm:hover { border-color: color-mix(in srgb, var(--ac) 35%, var(--border2)); }
+.card-dim { border-top-color: var(--dim); opacity: 0.6; }
+.card-dim:hover { opacity: 0.8; }
+
+.cs-top  { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; }
+.cs-num  { font-size:0.58rem; color:var(--ac); letter-spacing:0.1em; }
+.cs-icon { font-size:1.25rem; }
+.cs-type { font-size:0.54rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.8rem; display:block; }
+.cs-title {
+  font-family:'Bebas Neue',sans-serif; font-size:1.75rem; color:var(--ac);
+  line-height:0.95; margin-bottom:0.7rem;
+}
+.cs-desc { font-size:0.72rem; color:var(--muted); line-height:1.75; margin-bottom:1.1rem; flex:1; }
+.cs-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:1.25rem; }
+.cs-link {
+  font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--ac);
+  text-decoration:none; letter-spacing:0.06em; text-transform:uppercase;
+  transition: opacity 0.2s; align-self:flex-start;
+}
+.cs-link:hover { opacity: 0.7; }
+.cs-wip { font-size:0.6rem; color:var(--muted); letter-spacing:0.08em; }
+
+/* shared tags */
+.ptag {
+  font-family:'JetBrains Mono',monospace; font-size:0.54rem; letter-spacing:0.05em;
+  padding:0.16rem 0.48rem; border-radius:3px; text-transform:uppercase;
+  background: color-mix(in srgb, var(--ac) 7%, transparent);
+  color: var(--ac);
+  border: 1px solid color-mix(in srgb, var(--ac) 16%, transparent);
+}
+.card-dim .ptag { --ac: var(--muted); }
+</style>

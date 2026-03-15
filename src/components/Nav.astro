@@ -1,0 +1,63 @@
+---
+---
+<nav id="nav">
+  <a href="/" class="logo">
+    <span class="logo-bracket">[</span>SB<span class="logo-bracket">]</span>
+  </a>
+
+  <ul class="links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <a href="mailto:soeukbondolcc@gmail.com" class="hire">
+    <span class="hire-dot"></span>Available
+  </a>
+</nav>
+
+<style>
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background: rgba(6,7,10,0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+@media(min-width:640px){ nav{ padding: 0.9rem 2.5rem; } }
+
+.logo {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 600;
+  color: var(--ink); text-decoration: none; letter-spacing: 0.05em;
+}
+.logo-bracket { color: var(--acid); }
+
+.links {
+  display: flex; gap: 2rem; list-style: none;
+}
+.links a {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.links a:hover { color: var(--acid); }
+@media(max-width:600px){ .links { display: none; } }
+
+.hire {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--acid); text-decoration: none;
+  border: 1px solid rgba(200,255,87,0.25); border-radius: 20px;
+  padding: 0.35rem 0.85rem; background: rgba(200,255,87,0.05);
+  transition: background 0.2s, border-color 0.2s;
+}
+.hire:hover { background: rgba(200,255,87,0.1); border-color: rgba(200,255,87,0.5); }
+.hire-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--acid);
+  animation: pulse 2s ease infinite;
+}
+</style>
