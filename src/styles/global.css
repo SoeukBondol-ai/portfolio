@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --bg:       #06070a;
@@ -33,7 +33,6 @@ body {
   min-height: 100vh;
 }
 
-/* grain */
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -42,7 +41,6 @@ body::before {
   opacity: 0.4;
 }
 
-/* dot grid */
 body::after {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -58,26 +56,16 @@ body::after {
 .font-display { font-family: 'Bebas Neue', sans-serif; }
 .font-mono    { font-family: 'JetBrains Mono', monospace; }
 
-/* reveal */
 .reveal {
   opacity: 0; transform: translateY(28px);
   transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
 .reveal.on { opacity: 1; transform: none; }
 
-/* section label */
-.sec-eye {
-  display: flex; align-items: center; gap: 0.9rem; margin-bottom: 3.5rem;
-}
-.sec-eye-num {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
-  color: var(--acid); letter-spacing: 0.12em;
-}
+.sec-eye { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 3.5rem; }
+.sec-eye-num { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--acid); letter-spacing: 0.12em; }
 .sec-eye-line { flex: 1; height: 1px; background: var(--border); max-width: 48px; }
-.sec-eye-txt  {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
-  color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase;
-}
+.sec-eye-txt  { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; }
 
 @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
