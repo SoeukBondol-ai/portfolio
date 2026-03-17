@@ -1,28 +1,39 @@
 ---
-const categories = [
-  {
-    label: 'Data & ML',
-    color: 'acid',
-    tools: ['Python','Pandas','NumPy','Scikit-learn','PyTorch','TensorFlow','Matplotlib','Seaborn','Jupyter'],
-  },
-  {
-    label: 'Backend & APIs',
-    color: 'cyan',
-    tools: ['FastAPI','PostgreSQL','SQLAlchemy','REST','JWT','Pydantic','Uvicorn'],
-  },
-  {
-    label: 'DevOps & Tools',
-    color: 'violet',
-    tools: ['Docker','Git','Linux','Bash','Neovim','tmux','GitHub Actions','SSH'],
-  },
-  {
-    label: 'Data Engineering',
-    color: 'amber',
-    tools: ['SQL','ETL','Airflow','dbt','CSV/JSON','Data Cleaning','EDA'],
-  },
+// Verified slugs from simpleicons.org
+// Using jsDelivr which is more reliable than cdn.simpleicons.org
+const CDN = 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons';
+
+const stack = [
+  // Data & ML
+  { name: 'Python',       slug: 'python',        color: '#3776AB', cat: 'Data & ML' },
+  { name: 'PyTorch',      slug: 'pytorch',       color: '#EE4C2C', cat: 'Data & ML' },
+  { name: 'Scikit-learn', slug: 'scikitlearn',   color: '#F7931E', cat: 'Data & ML' },
+  { name: 'Pandas',       slug: 'pandas',        color: '#150458', cat: 'Data & ML' },
+  { name: 'NumPy',        slug: 'numpy',         color: '#013243', cat: 'Data & ML' },
+  { name: 'OpenCV',       slug: 'opencv',        color: '#5C3EE8', cat: 'Data & ML' },
+  { name: 'Jupyter',      slug: 'jupyter',       color: '#F37626', cat: 'Data & ML' },
+  // Backend
+  { name: 'FastAPI',      slug: 'fastapi',       color: '#009688', cat: 'Backend'   },
+  { name: 'PostgreSQL',   slug: 'postgresql',    color: '#4169E1', cat: 'Backend'   },
+  { name: 'SQLAlchemy',   slug: 'sqlalchemy',    color: '#D71F00', cat: 'Backend'   },
+  // DevOps
+  { name: 'Docker',       slug: 'docker',        color: '#2496ED', cat: 'DevOps'    },
+  { name: 'GitHub',       slug: 'github',        color: '#ffffff', cat: 'DevOps'    },
+  { name: 'Linux',        slug: 'linux',         color: '#FCC624', cat: 'DevOps'    },
+  { name: 'Git',          slug: 'git',           color: '#F05032', cat: 'DevOps'    },
+  // Tools
+  { name: 'Neovim',       slug: 'neovim',        color: '#57A143', cat: 'Tools'     },
+  { name: 'Astro',        slug: 'astro',         color: '#FF5D01', cat: 'Tools'     },
+  { name: 'HuggingFace',  slug: null,            color: '#FFD21E', cat: 'Tools'     }, // not in simple-icons
+  { name: 'uv',           slug: null,            color: '#DE5FE9', cat: 'Tools'     }, // not in simple-icons
 ];
-const colorMap: Record<string,string> = {
-  acid:'#c8ff57', cyan:'#38d9f5', violet:'#8b5cf6', amber:'#f59e0b',
+
+const cats = ['Data & ML', 'Backend', 'DevOps', 'Tools'];
+
+// Inline SVGs for icons not in simple-icons
+const customIcons: Record<string, string> = {
+  HuggingFace: `<svg viewBox="0 0 24 24" fill="#FFD21E" xmlns="http://www.w3.org/2000/svg"><text y="20" font-size="20">🤗</text></svg>`,
+  uv: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1a1a2e"/><text x="3" y="17" font-family="monospace" font-size="11" font-weight="bold" fill="#DE5FE9">uv</text></svg>`,
 };
 ---
 
@@ -39,21 +50,36 @@ const colorMap: Record<string,string> = {
       <p class="sh-sub">Every tool chosen with intent. Zero bloat.</p>
     </div>
 
-    <div class="cats">
-      {categories.map((cat, i) => (
-        <div class="cat reveal" style={`--cc:${colorMap[cat.color]};transition-delay:${i*0.1}s`}>
-          <div class="cat-header">
-            <span class="cat-indicator"></span>
-            <span class="cat-label font-mono">{cat.label}</span>
+    <!-- Filter tabs -->
+    <div class="cat-tabs reveal">
+      <button class="ctab active" data-cat="all">All</button>
+      {cats.map(c => <button class="ctab" data-cat={c}>{c}</button>)}
+    </div>
+
+    <!-- Logo grid -->
+    <div class="logo-grid reveal">
+      {stack.map(tool => (
+        <div class="logo-card" data-cat={tool.cat} title={tool.name}>
+          <div class="lc-icon" style={`--tool-color:${tool.color}`}>
+            {tool.slug ? (
+              <img
+                src={`${CDN}/${tool.slug}.svg`}
+                alt={tool.name}
+                width="36"
+                height="36"
+                loading="lazy"
+                class="tool-svg"
+              />
+            ) : (
+              <span class="custom-icon" set:html={customIcons[tool.name] ?? tool.name.slice(0,2)}></span>
+            )}
           </div>
-          <div class="cat-tools">
-            {cat.tools.map(t => <span class="tool">{t}</span>)}
-          </div>
+          <span class="lc-name font-mono">{tool.name}</span>
         </div>
       ))}
     </div>
 
-    <!-- Proficiency visual -->
+    <!-- Proficiency bars -->
     <div class="proficiency reveal">
       <div class="prof-header font-mono">
         <span>skill_matrix.json</span>
@@ -61,22 +87,22 @@ const colorMap: Record<string,string> = {
       </div>
       <div class="prof-grid">
         {[
-          { name: 'Python',          level: 93, cat: 'Data & ML'   },
-          { name: 'Data Analysis',   level: 88, cat: 'Data & ML'   },
-          { name: 'Machine Learning',level: 82, cat: 'ML'          },
-          { name: 'FastAPI',         level: 80, cat: 'Backend'     },
-          { name: 'SQL',             level: 76, cat: 'Data'        },
-          { name: 'Docker',          level: 72, cat: 'DevOps'      },
-          { name: 'Deep Learning',   level: 70, cat: 'ML'          },
-          { name: 'Linux / Bash',    level: 85, cat: 'DevOps'      },
-        ].map((s,i) => (
+          { name: 'Python',           level: 93, cat: 'Data & ML', color: '#c8ff57' },
+          { name: 'Data Analysis',    level: 88, cat: 'Data & ML', color: '#c8ff57' },
+          { name: 'Machine Learning', level: 82, cat: 'ML',        color: '#38d9f5' },
+          { name: 'FastAPI',          level: 80, cat: 'Backend',   color: '#38d9f5' },
+          { name: 'Linux / Bash',     level: 85, cat: 'DevOps',    color: '#8b5cf6' },
+          { name: 'SQL',              level: 76, cat: 'Data',      color: '#c8ff57' },
+          { name: 'Docker',           level: 72, cat: 'DevOps',    color: '#8b5cf6' },
+          { name: 'Deep Learning',    level: 70, cat: 'ML',        color: '#38d9f5' },
+        ].map((s, i) => (
           <div class="prof-row">
             <div class="pr-meta">
               <span class="pr-name font-mono">{s.name}</span>
               <span class="pr-cat font-mono">{s.cat}</span>
             </div>
             <div class="pr-track">
-              <div class="pr-fill" data-w={s.level} style={`transition-delay:${i*0.07}s`}></div>
+              <div class="pr-fill" data-w={s.level} style={`transition-delay:${i*0.07}s;--bc:${s.color}`}></div>
             </div>
             <span class="pr-num font-mono">{s.level}</span>
           </div>
@@ -91,69 +117,147 @@ const colorMap: Record<string,string> = {
 @media(min-width:640px){ .stack{ padding:7rem 2.5rem; } }
 .stack-inner { max-width:1200px; margin:0 auto; }
 
-.sh { margin-bottom:3.5rem; }
+.sh { margin-bottom:2.5rem; }
 .sh-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,8vw,6.5rem); line-height:0.9; margin-bottom:0.75rem; }
 .sh-title em { color:var(--acid); font-style:normal; }
 .sh-sub { font-size:0.8rem; color:var(--muted); }
 
-.cats { display:grid; grid-template-columns:1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:2rem; }
-@media(min-width:640px){ .cats{ grid-template-columns:1fr 1fr; } }
-@media(min-width:900px){ .cats{ grid-template-columns:repeat(4,1fr); } }
-
-.cat { background:var(--bg); padding:1.75rem 1.5rem; transition:background 0.2s; }
-.cat:hover { background:var(--surface); }
-.cat-header { display:flex; align-items:center; gap:0.6rem; margin-bottom:1.25rem; }
-.cat-indicator { width:8px; height:8px; border-radius:50%; background:var(--cc); flex-shrink:0; }
-.cat-label { font-size:0.6rem; color:var(--cc); letter-spacing:0.12em; text-transform:uppercase; }
-.cat-tools { display:flex; flex-wrap:wrap; gap:0.35rem; }
-.tool {
-  font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.04em;
-  padding:0.2rem 0.55rem; border:1px solid var(--border); border-radius:3px;
-  color:var(--muted); background:var(--surface); transition:border-color 0.2s, color 0.2s;
+/* TABS */
+.cat-tabs { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:2rem; }
+.ctab {
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  letter-spacing:0.08em; text-transform:uppercase;
+  padding:0.3rem 0.8rem; border-radius:4px; cursor:pointer;
+  border:1px solid var(--border2); background:var(--surface); color:var(--muted);
+  transition:all 0.15s;
 }
-.cat:hover .tool { border-color:color-mix(in srgb,var(--cc) 20%,var(--border)); }
-.cat:hover .tool:hover { border-color:var(--cc); color:var(--cc); }
+.ctab:hover { border-color:rgba(200,255,87,0.3); color:var(--acid); }
+.ctab.active { border-color:var(--acid); color:var(--acid); background:rgba(200,255,87,0.07); }
 
-/* proficiency */
-.proficiency {
-  background:var(--surface); border:1px solid var(--border2); border-radius:10px; overflow:hidden;
+/* LOGO GRID */
+.logo-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  margin-bottom:2rem;
 }
+@media(min-width:640px){ .logo-grid{ grid-template-columns:repeat(auto-fill,minmax(115px,1fr)); } }
+
+.logo-card {
+  background:var(--bg); padding:1.6rem 0.75rem;
+  display:flex; flex-direction:column; align-items:center; gap:0.65rem;
+  transition:background 0.2s; cursor:default;
+}
+.logo-card:hover { background:var(--lift); }
+.logo-card.hidden { display:none; }
+
+.lc-icon {
+  width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* SVG icons — colorize via CSS filter trick */
+.tool-svg {
+  width:36px; height:36px; object-fit:contain;
+  /* convert to tool color using CSS filter */
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(0deg) brightness(0.85);
+  transition:filter 0.25s, transform 0.25s;
+}
+/* On hover brighten */
+.logo-card:hover .tool-svg {
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(0deg) brightness(1.1);
+  transform: scale(1.12) translateY(-2px);
+}
+
+/* For icons with specific colors we use a different approach:
+   load with ?color= parameter if using cdn.simpleicons.org
+   OR keep the SVG's own color by not filtering */
+.tool-svg[src*="python"]      { filter:none; opacity:0.8; }
+.tool-svg[src*="pytorch"]     { filter:none; opacity:0.8; }
+.tool-svg[src*="fastapi"]     { filter:none; opacity:0.8; }
+.tool-svg[src*="docker"]      { filter:none; opacity:0.8; }
+.tool-svg[src*="postgresql"]  { filter:none; opacity:0.8; }
+.tool-svg[src*="git.svg"]     { filter:none; opacity:0.8; }
+.tool-svg[src*="jupyter"]     { filter:none; opacity:0.8; }
+.tool-svg[src*="astro"]       { filter:none; opacity:0.8; }
+.tool-svg[src*="neovim"]      { filter:none; opacity:0.8; }
+.tool-svg[src*="opencv"]      { filter:none; opacity:0.8; }
+.tool-svg[src*="scikitlearn"] { filter:none; opacity:0.8; }
+.tool-svg[src*="pandas"]      { filter:brightness(0) invert(1) opacity(0.6); }
+.tool-svg[src*="numpy"]       { filter:none; opacity:0.8; }
+.tool-svg[src*="linux"]       { filter:none; opacity:0.8; }
+.tool-svg[src*="github"]      { filter:invert(1) opacity(0.75); }
+.tool-svg[src*="sqlalchemy"]  { filter:none; opacity:0.8; }
+
+.logo-card:hover .tool-svg { opacity:1 !important; filter:none !important; transform:scale(1.12) translateY(-2px); }
+
+.custom-icon { width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
+.custom-icon svg { width:36px; height:36px; }
+
+.lc-name { font-size:0.58rem; color:var(--muted); text-align:center; letter-spacing:0.02em; line-height:1.3; transition:color 0.2s; }
+.logo-card:hover .lc-name { color:var(--ink); }
+
+/* PROFICIENCY */
+.proficiency { background:var(--surface); border:1px solid var(--border2); border-radius:10px; overflow:hidden; }
 .prof-header {
   display:flex; align-items:center; justify-content:space-between;
   padding:0.75rem 1.25rem; border-bottom:1px solid var(--border);
-  font-size:0.6rem; color:var(--muted);
-  background:rgba(255,255,255,0.02);
+  font-size:0.6rem; color:var(--muted); background:rgba(255,255,255,0.02);
 }
-.prof-badge {
-  font-size:0.5rem; letter-spacing:0.12em; color:var(--acid);
-  border:1px solid rgba(200,255,87,0.3); padding:0.1rem 0.35rem; border-radius:2px;
-}
+.prof-badge { font-size:0.5rem; letter-spacing:0.12em; color:var(--acid); border:1px solid rgba(200,255,87,0.3); padding:0.1rem 0.35rem; border-radius:2px; }
 .prof-grid { padding:1.25rem; display:flex; flex-direction:column; gap:0.85rem; }
-.prof-row { display:grid; grid-template-columns:200px 1fr 32px; align-items:center; gap:0.75rem; }
-@media(max-width:560px){ .prof-row{ grid-template-columns:120px 1fr 28px; } }
+.prof-row { display:grid; grid-template-columns:180px 1fr 32px; align-items:center; gap:0.75rem; }
+@media(max-width:560px){ .prof-row{ grid-template-columns:110px 1fr 28px; } }
 .pr-meta { display:flex; flex-direction:column; gap:0.15rem; }
 .pr-name { font-size:0.65rem; color:var(--ink); }
 .pr-cat  { font-size:0.52rem; color:var(--muted); }
-.pr-track { height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
-.pr-fill {
-  height:100%; background:linear-gradient(90deg,var(--acid),var(--cyan));
-  border-radius:2px; width:0; transition:width 1.4s cubic-bezier(0.16,1,0.3,1);
-}
+.pr-track { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.pr-fill  { height:100%; border-radius:3px; width:0; background:var(--bc, var(--acid)); transition:width 1.4s cubic-bezier(0.16,1,0.3,1); }
 .pr-num { font-size:0.58rem; color:var(--muted); text-align:right; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.on { opacity:1; transform:none; }
 </style>
 
 <script>
-const prof = document.querySelector('.proficiency');
+// Category filter
+var tabs  = document.querySelectorAll('.ctab');
+var cards = document.querySelectorAll('.logo-card');
+tabs.forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    var cat = tab.getAttribute('data-cat');
+    cards.forEach(function(card) {
+      if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// Skill bars on scroll
+var prof = document.querySelector('.proficiency');
 if (prof) {
-  const io = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('.pr-fill').forEach((el: Element) => {
-        const b = el as HTMLElement;
-        b.style.width = (b.dataset.w || '0') + '%';
+  var io = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.pr-fill').forEach(function(el) {
+        el.style.width = el.getAttribute('data-w') + '%';
       });
       io.disconnect();
     }
   }, { threshold: 0.2 });
   io.observe(prof);
 }
+
+// Scroll reveal
+var revObs = new IntersectionObserver(function(es) {
+  es.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
 </script>
