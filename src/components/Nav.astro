@@ -1,5 +1,7 @@
 ---
+
 ---
+
 <nav id="nav">
   <a href="/" class="logo">
     <span class="logo-bracket">[</span>SB<span class="logo-bracket">]</span>
@@ -18,43 +20,89 @@
 </nav>
 
 <style>
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.9rem 1.5rem;
-  background: rgba(13,17,23,0.92);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-@media(min-width:640px){ nav { padding: 0.9rem 2.5rem; } }
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.5rem;
+    background: rgba(13, 17, 23, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  @media (min-width: 640px) {
+    nav {
+      padding: 0.9rem 2.5rem;
+    }
+  }
 
-.logo {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 600;
-  color: var(--ink); text-decoration: none; letter-spacing: 0.05em;
-}
-.logo-bracket { color: var(--acid); }
+  .logo {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .logo-bracket {
+    color: var(--acid);
+  }
 
-.links { display: flex; gap: 2rem; list-style: none; }
-.links a {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.63rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none; transition: color 0.2s;
-}
-.links a:hover { color: var(--acid); }
-@media(max-width:600px){ .links { display: none; } }
+  .links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .links a {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .links a:hover {
+    color: var(--acid);
+  }
+  @media (max-width: 600px) {
+    .links {
+      display: none;
+    }
+  }
 
-.hire {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--acid); text-decoration: none;
-  border: 1px solid rgba(240,180,41,0.3); border-radius: 20px;
-  padding: 0.35rem 0.85rem; background: rgba(240,180,41,0.07);
-  transition: background 0.2s, border-color 0.2s;
-}
-.hire:hover { background: rgba(240,180,41,0.15); border-color: rgba(240,180,41,0.6); }
-.hire-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--acid);
-  animation: pulse 2s ease infinite;
-}
+  .hire {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--acid);
+    text-decoration: none;
+    border: 1px solid rgba(240, 180, 41, 0.3);
+    border-radius: 20px;
+    padding: 0.35rem 0.85rem;
+    background: rgba(240, 180, 41, 0.07);
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+  }
+  .hire:hover {
+    background: rgba(240, 180, 41, 0.15);
+    border-color: rgba(240, 180, 41, 0.6);
+  }
+  .hire-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--acid);
+    animation: pulse 2s ease infinite;
+  }
 </style>

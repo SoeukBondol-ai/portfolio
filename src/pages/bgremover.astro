@@ -1,0 +1,787 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+// API URL for mondolreal space
+const API_URL = "https://mondolreal-bg-remover.hf.space";
+const HF_URL = "https://huggingface.co/spaces/mondolreal/bg-remover";
+const GH_URL = "https://github.com/SoeukBondol-ai/bg-remover";
+---
+
+<Base title="Background Remover — Soeuk Bondol">
+    <Nav />
+
+    <main class="page">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <a href="/portfolio/#projects" class="back font-mono">← Projects</a>
+            <div class="top-meta">
+                <span class="tbadge amber font-mono">U2Net</span>
+                <span class="tbadge blue font-mono">FastAPI</span>
+                <span class="tbadge violet font-mono">rembg</span>
+                <span class="tbadge font-mono">HuggingFace</span>
+            </div>
+            <div class="api-status">
+                <span class="as-dot" id="apiDot"></span>
+                <span class="as-txt font-mono" id="apiTxt">checking…</span>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="hero-row">
+            <div>
+                <div class="hero-eye">
+                    <span class="he-num font-mono">002</span>
+                    <div class="he-line"></div>
+                    <span class="he-label font-mono">Live Demo</span>
+                </div>
+                <h1 class="hero-title">BACKGROUND<br /><em>REMOVER</em></h1>
+                <p class="hero-sub">
+                    Upload any image — U2Net removes the background instantly.
+                    Runs on Hugging Face Spaces via FastAPI + Docker. Download
+                    as transparent PNG.
+                </p>
+                <div class="hero-btns">
+                    <a
+                        href={HF_URL}
+                        target="_blank"
+                        rel="noopener"
+                        class="hbtn hbtn-ghost font-mono"
+                    >
+                        HuggingFace ↗
+                    </a>
+                    <a
+                        href={GH_URL}
+                        target="_blank"
+                        rel="noopener"
+                        class="hbtn hbtn-ghost font-mono"
+                    >
+                        GitHub ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-box font-mono" id="errorBox"></div>
+
+        <!-- UPLOAD -->
+        <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" accept="image/*" />
+            <div class="uz-body">
+                <div class="uz-icon" aria-hidden="true">
+                    <svg
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <circle cx="6" cy="6" r="2.5"></circle>
+                        <circle cx="6" cy="18" r="2.5"></circle>
+                        <path d="M20 4 8 15"></path>
+                        <path d="M20 20 10.5 13"></path>
+                    </svg>
+                </div>
+                <div class="uz-title font-mono">
+                    Drop image or click to upload
+                </div>
+                <div class="uz-sub font-mono">PNG · JPG · WEBP — max 10MB</div>
+                <div class="uz-btn font-mono">Choose file</div>
+            </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress-wrap" id="progressWrap">
+            <div class="prog-inner">
+                <div class="spinner"></div>
+                <div class="font-mono" id="progTxt">Removing background…</div>
+                <div class="font-mono prog-sub">
+                    U2Net processing your image
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="result-grid" id="resultGrid">
+            <div class="img-panel">
+                <div class="panel-bar">
+                    <div class="p-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="panel-title font-mono">original</span>
+                    <span class="panel-badge amber font-mono">INPUT</span>
+                </div>
+                <div class="img-wrap" id="origWrap">
+                    <div class="img-placeholder font-mono">
+                        No image uploaded
+                    </div>
+                </div>
+                <div class="panel-foot">
+                    <span class="panel-info font-mono" id="origInfo">—</span>
+                </div>
+            </div>
+
+            <div class="img-panel">
+                <div class="panel-bar">
+                    <div class="p-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="panel-title font-mono">removed_bg.png</span>
+                    <span class="panel-badge blue font-mono">OUTPUT</span>
+                </div>
+                <div class="img-wrap checker" id="resultWrap">
+                    <div class="img-placeholder font-mono">
+                        Waiting for processing…
+                    </div>
+                </div>
+                <div class="panel-foot">
+                    <span class="panel-info font-mono" id="resultInfo">—</span>
+                    <a class="dl-btn font-mono disabled" id="dlBtn">
+                        <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+                            ></path>
+                        </svg>
+                        Download PNG
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- API FOOTER -->
+        <div class="api-footer">
+            <div class="af-left">
+                <span class="af-dot" id="afDot"></span>
+                <span class="af-url font-mono">POST {API_URL}/remove-bg</span>
+            </div>
+            <div class="af-links">
+                <a
+                    href={HF_URL}
+                    target="_blank"
+                    rel="noopener"
+                    class="af-link font-mono">HuggingFace ↗</a
+                >
+                <a
+                    href={GH_URL}
+                    target="_blank"
+                    rel="noopener"
+                    class="af-link font-mono">GitHub ↗</a
+                >
+            </div>
+        </div>
+    </main>
+    <Footer />
+</Base>
+
+<style>
+    .page {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        padding: 72px 1.25rem 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    @media (min-width: 640px) {
+        .page {
+            padding: 72px 2rem 3.5rem;
+        }
+    }
+
+    /* TOP BAR */
+    .top-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.65rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+    }
+    .back {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .back:hover {
+        color: var(--acid);
+    }
+    .top-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        flex: 1;
+    }
+    .tbadge {
+        font-size: 0.55rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.18rem 0.5rem;
+        border-radius: 3px;
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        background: var(--bg);
+    }
+    .tbadge.amber {
+        border-color: rgba(240, 180, 41, 0.3);
+        color: var(--acid);
+        background: rgba(240, 180, 41, 0.07);
+    }
+    .tbadge.blue {
+        border-color: rgba(77, 157, 224, 0.3);
+        color: var(--blue);
+        background: rgba(77, 157, 224, 0.07);
+    }
+    .tbadge.violet {
+        border-color: rgba(167, 139, 250, 0.3);
+        color: var(--violet);
+        background: rgba(167, 139, 250, 0.07);
+    }
+    .api-status {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-shrink: 0;
+    }
+    .as-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--muted);
+    }
+    .as-dot.ok {
+        background: var(--green);
+        animation: pulse 2s ease infinite;
+    }
+    .as-dot.error {
+        background: var(--red);
+    }
+    .as-txt {
+        font-size: 0.58rem;
+        color: var(--muted);
+    }
+
+    /* HERO */
+    .hero-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+    .hero-eye {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    .he-num {
+        font-size: 0.58rem;
+        color: var(--acid);
+        letter-spacing: 0.12em;
+    }
+    .he-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        max-width: 48px;
+    }
+    .he-label {
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .hero-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        line-height: 0.9;
+        margin-bottom: 0.75rem;
+    }
+    .hero-title em {
+        color: var(--acid);
+        font-style: normal;
+    }
+    .hero-sub {
+        font-size: 0.77rem;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 460px;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+    .hbtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.45rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .hbtn-ghost {
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        background: var(--surface);
+    }
+    .hbtn-ghost:hover {
+        border-color: var(--acid);
+        color: var(--acid);
+    }
+
+    /* ERROR */
+    .error-box {
+        display: none;
+        padding: 0.85rem 1.1rem;
+        border-radius: 8px;
+        background: rgba(248, 113, 113, 0.08);
+        border: 1px solid rgba(248, 113, 113, 0.25);
+        font-size: 0.68rem;
+        color: var(--red);
+    }
+    .error-box.show {
+        display: block;
+    }
+
+    /* UPLOAD */
+    .upload-zone {
+        border: 2px dashed var(--border2);
+        border-radius: 12px;
+        background: var(--surface);
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+    }
+    .upload-zone:hover,
+    .upload-zone.drag {
+        border-color: var(--acid);
+        background: rgba(240, 180, 41, 0.03);
+    }
+    .upload-zone input {
+        display: none;
+    }
+    .uz-body {
+        padding: 2.2rem 1.5rem;
+        text-align: center;
+    }
+    .uz-icon {
+        color: var(--acid);
+        margin-bottom: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .uz-title {
+        font-size: 0.78rem;
+        color: var(--ink);
+        margin-bottom: 0.4rem;
+    }
+    .uz-sub {
+        font-size: 0.62rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+    }
+    .uz-btn {
+        display: inline-block;
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.5rem 1.2rem;
+        border-radius: 5px;
+        border: 1px solid rgba(240, 180, 41, 0.3);
+        color: var(--acid);
+        background: rgba(240, 180, 41, 0.07);
+        transition: all 0.2s;
+    }
+    .upload-zone:hover .uz-btn {
+        background: rgba(240, 180, 41, 0.14);
+        border-color: var(--acid);
+    }
+
+    /* PROGRESS */
+    .progress-wrap {
+        display: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2.2rem;
+    }
+    .progress-wrap.show {
+        display: block;
+    }
+    .prog-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border);
+        border-top-color: var(--acid);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+    .prog-inner .font-mono {
+        font-size: 0.72rem;
+        color: var(--ink);
+    }
+    .prog-sub {
+        font-size: 0.6rem;
+        color: var(--muted) !important;
+    }
+
+    /* RESULTS */
+    .result-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+    .result-grid.show {
+        opacity: 1;
+        transform: none;
+    }
+    @media (max-width: 640px) {
+        .result-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .img-panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    .panel-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.025);
+    }
+    .p-dots {
+        display: flex;
+        gap: 0.3rem;
+    }
+    .p-dots span {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+    }
+    .p-dots span:nth-child(1) {
+        background: #ff5f57;
+    }
+    .p-dots span:nth-child(2) {
+        background: #febc2e;
+    }
+    .p-dots span:nth-child(3) {
+        background: #28c840;
+    }
+    .panel-title {
+        font-size: 0.62rem;
+        color: var(--muted);
+        flex: 1;
+    }
+    .panel-badge {
+        font-size: 0.52rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.1rem 0.4rem;
+        border-radius: 2px;
+    }
+    .panel-badge.amber {
+        color: var(--acid);
+        border: 1px solid rgba(240, 180, 41, 0.3);
+        background: rgba(240, 180, 41, 0.07);
+    }
+    .panel-badge.blue {
+        color: var(--blue);
+        border: 1px solid rgba(77, 157, 224, 0.3);
+        background: rgba(77, 157, 224, 0.07);
+    }
+
+    .img-wrap {
+        flex: 1;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--lift);
+    }
+    .img-wrap.checker {
+        background-color: var(--lift);
+        background-image:
+            linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 25%,
+                transparent 25%
+            ),
+            linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.05) 25%,
+                transparent 25%
+            ),
+            linear-gradient(
+                45deg,
+                transparent 75%,
+                rgba(255, 255, 255, 0.05) 75%
+            ),
+            linear-gradient(
+                -45deg,
+                transparent 75%,
+                rgba(255, 255, 255, 0.05) 75%
+            );
+        background-size: 20px 20px;
+        background-position:
+            0 0,
+            0 10px,
+            10px -10px,
+            -10px 0;
+    }
+    .img-wrap img {
+        max-width: 100%;
+        max-height: 340px;
+        object-fit: contain;
+        padding: 1rem;
+        display: block;
+    }
+    .img-placeholder {
+        font-size: 0.65rem;
+        color: var(--muted);
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .panel-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.65rem 1rem;
+        border-top: 1px solid var(--border);
+    }
+    .panel-info {
+        font-size: 0.58rem;
+        color: var(--muted);
+    }
+    .dl-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.85rem;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid var(--border2);
+        background: var(--lift);
+        color: var(--muted);
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .dl-btn:hover {
+        border-color: var(--acid);
+        color: var(--acid);
+    }
+    .dl-btn.disabled {
+        opacity: 0.35;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    /* API FOOTER */
+    .api-footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.65rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+    }
+    .af-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1;
+        min-width: 0;
+    }
+    .af-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--acid);
+        animation: pulse 2s ease infinite;
+        flex-shrink: 0;
+    }
+    .af-url {
+        font-size: 0.58rem;
+        color: var(--acid);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .af-links {
+        display: flex;
+        gap: 1rem;
+    }
+    .af-link {
+        font-size: 0.58rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .af-link:hover {
+        color: var(--acid);
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script define:vars={{ API_URL }}>
+    const API = API_URL;
+
+    async function checkAPI() {
+        const dot = document.getElementById("apiDot");
+        const txt = document.getElementById("apiTxt");
+        const afd = document.getElementById("afDot");
+        try {
+            const r = await fetch(API + "/health");
+            if (r.ok) {
+                dot.className = "as-dot ok";
+                txt.textContent = "API live";
+                if (afd) afd.style.background = "var(--green)";
+            } else throw new Error();
+        } catch {
+            dot.className = "as-dot error";
+            txt.textContent = "API offline";
+            if (afd) afd.style.background = "var(--red)";
+        }
+    }
+    checkAPI();
+
+    const zone = document.getElementById("uploadZone");
+    const input = document.getElementById("fileInput");
+
+    zone.addEventListener("click", () => input.click());
+    zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("drag");
+    });
+    zone.addEventListener("dragleave", () => zone.classList.remove("drag"));
+    zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drag");
+        if (e.dataTransfer?.files[0]) processFile(e.dataTransfer.files[0]);
+    });
+    input.addEventListener("change", () => {
+        if (input.files?.[0]) processFile(input.files[0]);
+    });
+
+    function showError(msg) {
+        const b = document.getElementById("errorBox");
+        b.textContent = "Warning: " + msg;
+        b.classList.add("show");
+        setTimeout(() => b.classList.remove("show"), 7000);
+    }
+
+    async function processFile(file) {
+        if (!file.type.startsWith("image/")) {
+            showError("Please upload an image file.");
+            return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+            showError("File too large — max 10MB.");
+            return;
+        }
+
+        const origURL = URL.createObjectURL(file);
+        document.getElementById("origWrap").innerHTML =
+            `<img src="${origURL}" alt="original"/>`;
+        document.getElementById("origInfo").textContent =
+            `${file.name} · ${(file.size / 1024).toFixed(0)}KB`;
+
+        document.getElementById("resultGrid").classList.remove("show");
+        document.getElementById("progressWrap").classList.add("show");
+        document.getElementById("progTxt").textContent = "Removing background…";
+
+        const fd = new FormData();
+        fd.append("file", file);
+
+        try {
+            const res = await fetch(API + "/remove-bg", {
+                method: "POST",
+                body: fd,
+            });
+            if (!res.ok) {
+                const err = await res
+                    .json()
+                    .catch(() => ({ detail: `HTTP ${res.status}` }));
+                throw new Error(err.detail || `HTTP ${res.status}`);
+            }
+            const blob = await res.blob();
+            const resultURL = URL.createObjectURL(blob);
+
+            document.getElementById("resultWrap").innerHTML =
+                `<img src="${resultURL}" alt="result"/>`;
+            document.getElementById("resultInfo").textContent =
+                `removed_bg.png · ${(blob.size / 1024).toFixed(0)}KB`;
+
+            const dl = document.getElementById("dlBtn");
+            dl.href = resultURL;
+            dl.download = "removed_bg.png";
+            dl.classList.remove("disabled");
+
+            document.getElementById("progressWrap").classList.remove("show");
+            document.getElementById("resultGrid").classList.add("show");
+        } catch (err) {
+            document.getElementById("progressWrap").classList.remove("show");
+            showError(
+                "API error: " +
+                    (err instanceof Error ? err.message : String(err)),
+            );
+        }
+    }
+</script>
