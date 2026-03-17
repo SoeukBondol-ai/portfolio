@@ -22,24 +22,21 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.9rem 1.5rem;
-  background: rgba(6,7,10,0.85);
+  background: rgba(13,17,23,0.92);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: border-color 0.3s;
 }
-@media(min-width:640px){ nav{ padding: 0.9rem 2.5rem; } }
+@media(min-width:640px){ nav { padding: 0.9rem 2.5rem; } }
 
 .logo {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 600;
   color: var(--ink); text-decoration: none; letter-spacing: 0.05em;
 }
 .logo-bracket { color: var(--acid); }
 
-.links {
-  display: flex; gap: 2rem; list-style: none;
-}
+.links { display: flex; gap: 2rem; list-style: none; }
 .links a {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.63rem;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--muted); text-decoration: none; transition: color 0.2s;
 }
@@ -51,11 +48,11 @@ nav {
   font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--acid); text-decoration: none;
-  border: 1px solid rgba(200,255,87,0.25); border-radius: 20px;
-  padding: 0.35rem 0.85rem; background: rgba(200,255,87,0.05);
+  border: 1px solid rgba(240,180,41,0.3); border-radius: 20px;
+  padding: 0.35rem 0.85rem; background: rgba(240,180,41,0.07);
   transition: background 0.2s, border-color 0.2s;
 }
-.hire:hover { background: rgba(200,255,87,0.1); border-color: rgba(200,255,87,0.5); }
+.hire:hover { background: rgba(240,180,41,0.15); border-color: rgba(240,180,41,0.6); }
 .hire-dot {
   width: 6px; height: 6px; border-radius: 50%; background: var(--acid);
   animation: pulse 2s ease infinite;
