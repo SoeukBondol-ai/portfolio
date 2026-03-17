@@ -1,40 +1,28 @@
 ---
-// Verified slugs from simpleicons.org
-// Using jsDelivr which is more reliable than cdn.simpleicons.org
-const CDN = 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons';
-
+// Using simpleicons.org API — fetched at build time as colored SVGs
+// Color hex WITHOUT # — picked for max visibility on navy background
 const stack = [
-  // Data & ML
-  { name: 'Python',       slug: 'python',        color: '#3776AB', cat: 'Data & ML' },
-  { name: 'PyTorch',      slug: 'pytorch',       color: '#EE4C2C', cat: 'Data & ML' },
-  { name: 'Scikit-learn', slug: 'scikitlearn',   color: '#F7931E', cat: 'Data & ML' },
-  { name: 'Pandas',       slug: 'pandas',        color: '#150458', cat: 'Data & ML' },
-  { name: 'NumPy',        slug: 'numpy',         color: '#013243', cat: 'Data & ML' },
-  { name: 'OpenCV',       slug: 'opencv',        color: '#5C3EE8', cat: 'Data & ML' },
-  { name: 'Jupyter',      slug: 'jupyter',       color: '#F37626', cat: 'Data & ML' },
-  // Backend
-  { name: 'FastAPI',      slug: 'fastapi',       color: '#009688', cat: 'Backend'   },
-  { name: 'PostgreSQL',   slug: 'postgresql',    color: '#4169E1', cat: 'Backend'   },
-  { name: 'SQLAlchemy',   slug: 'sqlalchemy',    color: '#D71F00', cat: 'Backend'   },
-  // DevOps
-  { name: 'Docker',       slug: 'docker',        color: '#2496ED', cat: 'DevOps'    },
-  { name: 'GitHub',       slug: 'github',        color: '#ffffff', cat: 'DevOps'    },
-  { name: 'Linux',        slug: 'linux',         color: '#FCC624', cat: 'DevOps'    },
-  { name: 'Git',          slug: 'git',           color: '#F05032', cat: 'DevOps'    },
-  // Tools
-  { name: 'Neovim',       slug: 'neovim',        color: '#57A143', cat: 'Tools'     },
-  { name: 'Astro',        slug: 'astro',         color: '#FF5D01', cat: 'Tools'     },
-  { name: 'HuggingFace',  slug: null,            color: '#FFD21E', cat: 'Tools'     }, // not in simple-icons
-  { name: 'uv',           slug: null,            color: '#DE5FE9', cat: 'Tools'     }, // not in simple-icons
+  { name: 'Python',       icon: 'python',       color: '4b9cd3', cat: 'Data & ML' },
+  { name: 'PyTorch',      icon: 'pytorch',       color: 'ee4c2c', cat: 'Data & ML' },
+  { name: 'Scikit-learn', icon: 'scikitlearn',   color: 'f7931e', cat: 'Data & ML' },
+  { name: 'Pandas',       icon: 'pandas',        color: '5b9bd5', cat: 'Data & ML' },
+  { name: 'NumPy',        icon: 'numpy',         color: '4dabcf', cat: 'Data & ML' },
+  { name: 'OpenCV',       icon: 'opencv',        color: '9b72cf', cat: 'Data & ML' },
+  { name: 'Jupyter',      icon: 'jupyter',       color: 'f37626', cat: 'Data & ML' },
+  { name: 'FastAPI',      icon: 'fastapi',       color: '00d4aa', cat: 'Backend'   },
+  { name: 'PostgreSQL',   icon: 'postgresql',    color: '6ea7d8', cat: 'Backend'   },
+  { name: 'SQLAlchemy',   icon: 'sqlalchemy',    color: 'e83524', cat: 'Backend'   },
+  { name: 'Docker',       icon: 'docker',        color: '2496ed', cat: 'DevOps'    },
+  { name: 'GitHub',       icon: 'github',        color: 'c9d1d9', cat: 'DevOps'    },
+  { name: 'Linux',        icon: 'linux',         color: 'fcc624', cat: 'DevOps'    },
+  { name: 'Git',          icon: 'git',           color: 'f05032', cat: 'DevOps'    },
+  { name: 'Neovim',       icon: 'neovim',        color: '57a143', cat: 'Tools'     },
+  { name: 'Astro',        icon: 'astro',         color: 'ff5d01', cat: 'Tools'     },
+  { name: 'HuggingFace',  icon: null,            color: 'ffd21e', cat: 'Tools', emoji: '🤗' },
+  { name: 'uv',           icon: null,            color: 'de5fe9', cat: 'Tools', text: 'uv'  },
 ];
 
 const cats = ['Data & ML', 'Backend', 'DevOps', 'Tools'];
-
-// Inline SVGs for icons not in simple-icons
-const customIcons: Record<string, string> = {
-  HuggingFace: `<svg viewBox="0 0 24 24" fill="#FFD21E" xmlns="http://www.w3.org/2000/svg"><text y="20" font-size="20">🤗</text></svg>`,
-  uv: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1a1a2e"/><text x="3" y="17" font-family="monospace" font-size="11" font-weight="bold" fill="#DE5FE9">uv</text></svg>`,
-};
 ---
 
 <section class="stack" id="stack">
@@ -50,36 +38,34 @@ const customIcons: Record<string, string> = {
       <p class="sh-sub">Every tool chosen with intent. Zero bloat.</p>
     </div>
 
-    <!-- Filter tabs -->
     <div class="cat-tabs reveal">
       <button class="ctab active" data-cat="all">All</button>
       {cats.map(c => <button class="ctab" data-cat={c}>{c}</button>)}
     </div>
 
-    <!-- Logo grid -->
     <div class="logo-grid reveal">
       {stack.map(tool => (
         <div class="logo-card" data-cat={tool.cat} title={tool.name}>
-          <div class="lc-icon" style={`--tool-color:${tool.color}`}>
-            {tool.slug ? (
+          <div class="lc-icon">
+            {tool.icon ? (
               <img
-                src={`${CDN}/${tool.slug}.svg`}
+                src={`https://cdn.simpleicons.org/${tool.icon}/${tool.color}`}
                 alt={tool.name}
-                width="36"
-                height="36"
+                width="36" height="36"
                 loading="lazy"
-                class="tool-svg"
+                decoding="async"
               />
+            ) : tool.emoji ? (
+              <span class="lc-emoji">{tool.emoji}</span>
             ) : (
-              <span class="custom-icon" set:html={customIcons[tool.name] ?? tool.name.slice(0,2)}></span>
+              <span class="lc-text" style={`color:#${tool.color}`}>{tool.text}</span>
             )}
           </div>
-          <span class="lc-name font-mono">{tool.name}</span>
+          <span class="lc-name">{tool.name}</span>
         </div>
       ))}
     </div>
 
-    <!-- Proficiency bars -->
     <div class="proficiency reveal">
       <div class="prof-header font-mono">
         <span>skill_matrix.json</span>
@@ -87,14 +73,14 @@ const customIcons: Record<string, string> = {
       </div>
       <div class="prof-grid">
         {[
-          { name: 'Python',           level: 93, cat: 'Data & ML', color: '#c8ff57' },
-          { name: 'Data Analysis',    level: 88, cat: 'Data & ML', color: '#c8ff57' },
-          { name: 'Machine Learning', level: 82, cat: 'ML',        color: '#38d9f5' },
-          { name: 'FastAPI',          level: 80, cat: 'Backend',   color: '#38d9f5' },
-          { name: 'Linux / Bash',     level: 85, cat: 'DevOps',    color: '#8b5cf6' },
-          { name: 'SQL',              level: 76, cat: 'Data',      color: '#c8ff57' },
-          { name: 'Docker',           level: 72, cat: 'DevOps',    color: '#8b5cf6' },
-          { name: 'Deep Learning',    level: 70, cat: 'ML',        color: '#38d9f5' },
+          { name: 'Python',           level: 93, cat: 'Data & ML', color: 'var(--acid)' },
+          { name: 'Data Analysis',    level: 88, cat: 'Data & ML', color: 'var(--acid)' },
+          { name: 'Machine Learning', level: 82, cat: 'ML',        color: 'var(--cyan)'  },
+          { name: 'FastAPI',          level: 80, cat: 'Backend',   color: 'var(--cyan)'  },
+          { name: 'Linux / Bash',     level: 85, cat: 'DevOps',    color: 'var(--violet)'},
+          { name: 'SQL',              level: 76, cat: 'Data',      color: 'var(--acid)' },
+          { name: 'Docker',           level: 72, cat: 'DevOps',    color: 'var(--violet)'},
+          { name: 'Deep Learning',    level: 70, cat: 'ML',        color: 'var(--cyan)'  },
         ].map((s, i) => (
           <div class="prof-row">
             <div class="pr-meta">
@@ -102,7 +88,8 @@ const customIcons: Record<string, string> = {
               <span class="pr-cat font-mono">{s.cat}</span>
             </div>
             <div class="pr-track">
-              <div class="pr-fill" data-w={s.level} style={`transition-delay:${i*0.07}s;--bc:${s.color}`}></div>
+              <div class="pr-fill" data-w={s.level}
+                style={`transition-delay:${i*0.07}s;--bc:${s.color}`}></div>
             </div>
             <span class="pr-num font-mono">{s.level}</span>
           </div>
@@ -113,42 +100,59 @@ const customIcons: Record<string, string> = {
 </section>
 
 <style>
-.stack { position:relative; z-index:1; padding:5rem 1.5rem; border-top:1px solid var(--border); }
+.stack {
+  position:relative; z-index:1;
+  padding:5rem 1.5rem;
+  border-top:1px solid var(--border);
+}
 @media(min-width:640px){ .stack{ padding:7rem 2.5rem; } }
 .stack-inner { max-width:1200px; margin:0 auto; }
 
 .sh { margin-bottom:2.5rem; }
-.sh-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,8vw,6.5rem); line-height:0.9; margin-bottom:0.75rem; }
+.sh-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,8vw,6.5rem); line-height:0.9; margin-bottom:0.75rem;
+}
 .sh-title em { color:var(--acid); font-style:normal; }
-.sh-sub { font-size:0.8rem; color:var(--muted); }
+.sh-sub { font-size:0.82rem; color:var(--muted); }
 
 /* TABS */
-.cat-tabs { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:2rem; }
+.cat-tabs { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2rem; }
 .ctab {
-  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  font-family:'JetBrains Mono',monospace; font-size:0.62rem;
   letter-spacing:0.08em; text-transform:uppercase;
-  padding:0.3rem 0.8rem; border-radius:4px; cursor:pointer;
+  padding:0.35rem 0.9rem; border-radius:5px; cursor:pointer;
   border:1px solid var(--border2); background:var(--surface); color:var(--muted);
   transition:all 0.15s;
 }
-.ctab:hover { border-color:rgba(200,255,87,0.3); color:var(--acid); }
-.ctab.active { border-color:var(--acid); color:var(--acid); background:rgba(200,255,87,0.07); }
+.ctab:hover { border-color:var(--acid); color:var(--acid); background:var(--lift); }
+.ctab.active {
+  border-color:var(--acid); color:#000;
+  background:var(--acid); font-weight:600;
+}
 
 /* LOGO GRID */
 .logo-grid {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(105px, 1fr));
   gap:1px; background:var(--border);
-  border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  border:1px solid var(--border); border-radius:12px; overflow:hidden;
   margin-bottom:2rem;
 }
-@media(min-width:640px){ .logo-grid{ grid-template-columns:repeat(auto-fill,minmax(115px,1fr)); } }
 
 .logo-card {
-  background:var(--bg); padding:1.6rem 0.75rem;
-  display:flex; flex-direction:column; align-items:center; gap:0.65rem;
-  transition:background 0.2s; cursor:default;
+  background:var(--surface);
+  padding:1.75rem 0.75rem 1.25rem;
+  display:flex; flex-direction:column; align-items:center; gap:0.7rem;
+  transition:background 0.2s; cursor:default; position:relative; overflow:hidden;
+}
+.logo-card::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 0%, rgba(240,180,41,0.08), transparent 65%);
+  opacity:0; transition:opacity 0.25s;
 }
 .logo-card:hover { background:var(--lift); }
+.logo-card:hover::before { opacity:1; }
 .logo-card.hidden { display:none; }
 
 .lc-icon {
@@ -156,72 +160,70 @@ const customIcons: Record<string, string> = {
   display:flex; align-items:center; justify-content:center;
 }
 
-/* SVG icons — colorize via CSS filter trick */
-.tool-svg {
+/* Icons rendered with correct brand color from simpleicons CDN */
+.lc-icon img {
   width:36px; height:36px; object-fit:contain;
-  /* convert to tool color using CSS filter */
-  filter: invert(1) sepia(1) saturate(3) hue-rotate(0deg) brightness(0.85);
-  transition:filter 0.25s, transform 0.25s;
+  transition:transform 0.25s;
+  /* no filter — color is already baked in via URL */
 }
-/* On hover brighten */
-.logo-card:hover .tool-svg {
-  filter: invert(1) sepia(1) saturate(3) hue-rotate(0deg) brightness(1.1);
-  transform: scale(1.12) translateY(-2px);
+.logo-card:hover .lc-icon img { transform:scale(1.18) translateY(-3px); }
+
+.lc-emoji {
+  font-size:2.1rem; line-height:1;
+  transition:transform 0.25s; display:block;
 }
+.logo-card:hover .lc-emoji { transform:scale(1.15) translateY(-3px); }
 
-/* For icons with specific colors we use a different approach:
-   load with ?color= parameter if using cdn.simpleicons.org
-   OR keep the SVG's own color by not filtering */
-.tool-svg[src*="python"]      { filter:none; opacity:0.8; }
-.tool-svg[src*="pytorch"]     { filter:none; opacity:0.8; }
-.tool-svg[src*="fastapi"]     { filter:none; opacity:0.8; }
-.tool-svg[src*="docker"]      { filter:none; opacity:0.8; }
-.tool-svg[src*="postgresql"]  { filter:none; opacity:0.8; }
-.tool-svg[src*="git.svg"]     { filter:none; opacity:0.8; }
-.tool-svg[src*="jupyter"]     { filter:none; opacity:0.8; }
-.tool-svg[src*="astro"]       { filter:none; opacity:0.8; }
-.tool-svg[src*="neovim"]      { filter:none; opacity:0.8; }
-.tool-svg[src*="opencv"]      { filter:none; opacity:0.8; }
-.tool-svg[src*="scikitlearn"] { filter:none; opacity:0.8; }
-.tool-svg[src*="pandas"]      { filter:brightness(0) invert(1) opacity(0.6); }
-.tool-svg[src*="numpy"]       { filter:none; opacity:0.8; }
-.tool-svg[src*="linux"]       { filter:none; opacity:0.8; }
-.tool-svg[src*="github"]      { filter:invert(1) opacity(0.75); }
-.tool-svg[src*="sqlalchemy"]  { filter:none; opacity:0.8; }
+.lc-text {
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.1rem; font-weight:700; letter-spacing:0.05em;
+  transition:transform 0.25s;
+}
+.logo-card:hover .lc-text { transform:scale(1.1) translateY(-2px); }
 
-.logo-card:hover .tool-svg { opacity:1 !important; filter:none !important; transform:scale(1.12) translateY(-2px); }
-
-.custom-icon { width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
-.custom-icon svg { width:36px; height:36px; }
-
-.lc-name { font-size:0.58rem; color:var(--muted); text-align:center; letter-spacing:0.02em; line-height:1.3; transition:color 0.2s; }
+.lc-name {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--muted); text-align:center;
+  letter-spacing:0.02em; line-height:1.3; transition:color 0.2s;
+}
 .logo-card:hover .lc-name { color:var(--ink); }
 
 /* PROFICIENCY */
-.proficiency { background:var(--surface); border:1px solid var(--border2); border-radius:10px; overflow:hidden; }
+.proficiency {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden;
+}
 .prof-header {
   display:flex; align-items:center; justify-content:space-between;
-  padding:0.75rem 1.25rem; border-bottom:1px solid var(--border);
-  font-size:0.6rem; color:var(--muted); background:rgba(255,255,255,0.02);
+  padding:0.85rem 1.4rem; border-bottom:1px solid var(--border);
+  font-size:0.62rem; color:var(--muted); background:rgba(255,255,255,0.02);
 }
-.prof-badge { font-size:0.5rem; letter-spacing:0.12em; color:var(--acid); border:1px solid rgba(200,255,87,0.3); padding:0.1rem 0.35rem; border-radius:2px; }
-.prof-grid { padding:1.25rem; display:flex; flex-direction:column; gap:0.85rem; }
-.prof-row { display:grid; grid-template-columns:180px 1fr 32px; align-items:center; gap:0.75rem; }
-@media(max-width:560px){ .prof-row{ grid-template-columns:110px 1fr 28px; } }
-.pr-meta { display:flex; flex-direction:column; gap:0.15rem; }
-.pr-name { font-size:0.65rem; color:var(--ink); }
-.pr-cat  { font-size:0.52rem; color:var(--muted); }
-.pr-track { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
-.pr-fill  { height:100%; border-radius:3px; width:0; background:var(--bc, var(--acid)); transition:width 1.4s cubic-bezier(0.16,1,0.3,1); }
-.pr-num { font-size:0.58rem; color:var(--muted); text-align:right; }
+.prof-badge {
+  font-size:0.52rem; letter-spacing:0.12em; color:var(--acid);
+  border:1px solid rgba(240,180,41,0.35); padding:0.12rem 0.4rem; border-radius:3px;
+  background:rgba(240,180,41,0.08);
+}
+.prof-grid { padding:1.5rem; display:flex; flex-direction:column; gap:0.9rem; }
+.prof-row { display:grid; grid-template-columns:190px 1fr 34px; align-items:center; gap:0.85rem; }
+@media(max-width:560px){ .prof-row{ grid-template-columns:115px 1fr 28px; } }
+.pr-meta { display:flex; flex-direction:column; gap:0.18rem; }
+.pr-name { font-size:0.68rem; color:var(--ink); }
+.pr-cat  { font-size:0.53rem; color:var(--muted); }
+.pr-track {
+  height:6px; background:var(--border); border-radius:3px; overflow:hidden;
+}
+.pr-fill {
+  height:100%; border-radius:3px; width:0;
+  background:var(--bc, var(--acid));
+  transition:width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.pr-num { font-size:0.6rem; color:var(--muted); text-align:right; }
 
-/* REVEAL */
 .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
 .reveal.on { opacity:1; transform:none; }
 </style>
 
 <script>
-// Category filter
 var tabs  = document.querySelectorAll('.ctab');
 var cards = document.querySelectorAll('.logo-card');
 tabs.forEach(function(tab) {
@@ -239,7 +241,6 @@ tabs.forEach(function(tab) {
   });
 });
 
-// Skill bars on scroll
 var prof = document.querySelector('.proficiency');
 if (prof) {
   var io = new IntersectionObserver(function(entries) {
@@ -252,12 +253,10 @@ if (prof) {
   }, { threshold: 0.2 });
   io.observe(prof);
 }
-
-// Scroll reveal
-var revObs = new IntersectionObserver(function(es) {
+var ro = new IntersectionObserver(function(es) {
   es.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); }
+    if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
   });
 }, { threshold: 0.06 });
-document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+document.querySelectorAll('.reveal').forEach(function(el) { ro.observe(el); });
 </script>
