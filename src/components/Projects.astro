@@ -8,21 +8,23 @@ const projects = [
     detail: 'Custom CNN architecture · Data augmentation pipeline · Evaluated on real-world Khmer handwriting samples.',
     tags: ['Python', 'Deep Learning', 'CNN', 'OpenCV', 'OCR', 'Khmer NLP'],
     github: 'https://github.com/SoeukBondol-ai/khmer-number-recognition',
-    accent: 'acid',
-    icon: '🧠',
+    demo: '/portfolio/khmer',
+    accent: 'amber',
+    icon: 'ML',
     type: 'ML / Computer Vision',
   },
   {
     num: '002',
-    title: 'FastAPI Auth Service',
-    short: 'Backend · DevOps',
-    desc: 'Production-ready authentication microservice built with FastAPI. JWT-based access and refresh token flow, bcrypt password hashing, and full OpenAPI documentation. Ready to drop into any Python backend.',
-    detail: 'JWT · Refresh token rotation · bcrypt · SQLAlchemy · Docker-ready · OpenAPI docs.',
-    tags: ['Python', 'FastAPI', 'JWT', 'Docker', 'PostgreSQL', 'REST API'],
-    github: 'https://github.com/SoeukBondol-ai/fastapi-auth-service',
-    accent: 'cyan',
-    icon: '🔐',
-    type: 'Backend / DevOps',
+    title: 'Background Remover',
+    short: 'Computer Vision · API',
+    desc: 'AI-powered background removal using U2Net. Upload any image — people, products, animals — and get a transparent PNG back instantly. Deployed on Hugging Face Spaces via FastAPI + Docker.',
+    detail: 'U2Net · rembg · FastAPI · Docker · uv · HuggingFace Spaces.',
+    tags: ['Python', 'U2Net', 'rembg', 'FastAPI', 'Docker', 'Computer Vision'],
+    github: 'https://github.com/SoeukBondol-ai/bg-remover',
+    demo: '/portfolio/bgremover',
+    accent: 'blue',
+    icon: 'BG',
+    type: 'Computer Vision / API',
   },
   {
     num: '003',
@@ -32,8 +34,9 @@ const projects = [
     detail: 'CLI-first design · Structured output (JSON/CSV) · Configurable rules · Lightweight dependency tree.',
     tags: ['Python', 'CLI', 'Scraping', 'Automation', 'Data Pipeline'],
     github: 'https://github.com/SoeukBondol-ai/grabbit',
+    demo: null,
     accent: 'violet',
-    icon: '⚡',
+    icon: 'CLI',
     type: 'Tooling / Automation',
   },
   {
@@ -44,6 +47,7 @@ const projects = [
     detail: null,
     tags: ['Python', 'ML', 'Data Engineering'],
     github: null,
+    demo: null,
     accent: 'dim',
     icon: '⟳',
     type: 'TBD',
@@ -51,7 +55,8 @@ const projects = [
 ];
 
 const accentMap: Record<string,string> = {
-  acid:   '#c8ff57',
+  amber:  '#f0b429',
+  blue:   '#4d9de0',
   cyan:   '#38d9f5',
   violet: '#8b5cf6',
   dim:    '#2a2d40',
@@ -67,7 +72,10 @@ const accentMap: Record<string,string> = {
     </div>
 
     <div class="ph reveal">
-      <h2 class="ph-title">THINGS I'VE<br/><em>SHIPPED.</em></h2>
+      <h2 class="ph-title">
+        <span>THINGS I'VE</span>
+        <span class="ph-title-accent">SHIPPED.</span>
+      </h2>
       <p class="ph-sub">
         From Khmer NLP to auth microservices —<br/>
         real problems, real code, real impact.
@@ -82,7 +90,6 @@ const accentMap: Record<string,string> = {
             <span class="cf-num font-mono">{p.num}</span>
             <span class="cf-type font-mono">{p.type}</span>
           </div>
-          <div class="cf-icon">{p.icon}</div>
           <h3 class="cf-title">{p.title}</h3>
           <p class="cf-desc">{p.desc}</p>
           {p.detail && <p class="cf-detail font-mono">{p.detail}</p>}
@@ -90,10 +97,12 @@ const accentMap: Record<string,string> = {
             {p.tags.map(t => <span class="ptag">{t}</span>)}
           </div>
           <div class="cf-link-row">
-            <a href="/portfolio/khmer" class="cf-link cf-link-demo">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Try Live Demo
-            </a>
+            {p.demo && (
+              <a href={p.demo} class="cf-link cf-link-demo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Try Live Demo
+              </a>
+            )}
             {p.github && (
               <a href={p.github} target="_blank" rel="noopener" class="cf-link cf-link-gh">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -148,9 +157,14 @@ const accentMap: Record<string,string> = {
           <div class="cs-tags">
             {p.tags.map(t => <span class="ptag">{t}</span>)}
           </div>
-          {p.github ? (
-            <a href={p.github} target="_blank" rel="noopener" class="cs-link">
-              GitHub →
+          {p.demo ? (
+            <a href={p.demo} class="cs-link cs-link-demo">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Try Live Demo
+            </a>
+          ) : p.github ? (
+            <a href={p.github} target="_blank" rel="noopener" class="cs-link cs-link-gh">
+              GitHub
             </a>
           ) : (
             <span class="cs-wip font-mono">In Progress…</span>
@@ -162,16 +176,17 @@ const accentMap: Record<string,string> = {
 </section>
 
 <style>
-.projects { position:relative; z-index:1; padding: 5rem 1.5rem; border-top: 1px solid var(--border); }
-@media(min-width:640px){ .projects{ padding: 7rem 2.5rem; } }
+.projects { position:relative; z-index:1; padding: 4rem 1.25rem; border-top: 1px solid var(--border); }
+@media(min-width:640px){ .projects{ padding: 5.25rem 2rem; } }
 .projects-inner { max-width: 1200px; margin: 0 auto; }
 
-.ph { margin-bottom: 3.5rem; }
+.ph { margin-bottom: 2.25rem; }
 .ph-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.9; margin-bottom: 1rem;
+  font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: 0.86; margin-bottom: 0.7rem;
+  display: inline-flex; flex-direction: column; align-items: flex-start;
 }
-.ph-title em { color: var(--acid); font-style: normal; }
+.ph-title-accent { color: var(--acid); font-style: normal; }
 .ph-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.75; }
 
 /* FEATURED */
@@ -185,11 +200,16 @@ const accentMap: Record<string,string> = {
 @media(min-width:760px){ .card-featured{ grid-template-columns: 1fr 1fr; } }
 .card-featured:hover { border-color: color-mix(in srgb, var(--ac) 40%, var(--border2)); }
 
-.cf-left { padding: 2.5rem; display: flex; flex-direction: column; }
+.cf-left { padding: 2rem; display: flex; flex-direction: column; }
 .cf-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
 .cf-num  { font-size: 0.6rem; color: var(--ac); letter-spacing: 0.1em; }
 .cf-type { font-size: 0.56rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-.cf-icon { font-size: 2rem; margin-bottom: 1rem; }
+.cf-icon {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--ac); border: 1px solid color-mix(in srgb, var(--ac) 26%, transparent);
+  background: color-mix(in srgb, var(--ac) 8%, transparent);
+  border-radius: 4px; padding: 0.2rem 0.45rem; display: inline-block; margin-bottom: 1rem;
+}
 .cf-title {
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem);
   line-height: 0.95; color: var(--ac); margin-bottom: 0.9rem;
@@ -265,7 +285,12 @@ const accentMap: Record<string,string> = {
 
 .cs-top  { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; }
 .cs-num  { font-size:0.58rem; color:var(--ac); letter-spacing:0.1em; }
-.cs-icon { font-size:1.25rem; }
+.cs-icon {
+  font-family:'JetBrains Mono',monospace; font-size:0.56rem; color:var(--ac);
+  border:1px solid color-mix(in srgb, var(--ac) 24%, transparent);
+  background: color-mix(in srgb, var(--ac) 8%, transparent);
+  border-radius:3px; padding:0.12rem 0.36rem; letter-spacing:0.05em;
+}
 .cs-type { font-size:0.54rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.8rem; display:block; }
 .cs-title {
   font-family:'Bebas Neue',sans-serif; font-size:1.75rem; color:var(--ac);
@@ -276,9 +301,31 @@ const accentMap: Record<string,string> = {
 .cs-link {
   font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--ac);
   text-decoration:none; letter-spacing:0.06em; text-transform:uppercase;
-  transition: opacity 0.2s; align-self:flex-start;
+  transition: all 0.2s; align-self:flex-start;
 }
-.cs-link:hover { opacity: 0.7; }
+.cs-link-demo {
+  display:inline-flex; align-items:center; gap:0.45rem;
+  justify-content:center;
+  color:#000; background:var(--ac); padding:0.62rem 1rem;
+  border-radius:5px; border:1px solid transparent; font-weight:700;
+  width:100%;
+  letter-spacing:0.08em;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--ac) 28%, transparent);
+}
+.cs-link-demo:hover {
+  opacity:0.92;
+  transform:translateY(-1px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--ac) 34%, transparent);
+}
+.cs-link-gh {
+  display:inline-flex; align-items:center;
+  border:1px solid color-mix(in srgb, var(--ac) 30%, transparent);
+  background: color-mix(in srgb, var(--ac) 7%, transparent);
+  padding:0.5rem 0.9rem; border-radius:4px;
+}
+.cs-link-gh:hover {
+  background: color-mix(in srgb, var(--ac) 12%, transparent);
+}
 .cs-wip { font-size:0.6rem; color:var(--muted); letter-spacing:0.08em; }
 
 /* shared tags */
