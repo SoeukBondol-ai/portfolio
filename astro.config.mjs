@@ -6,5 +6,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://soeukbondol-ai.github.io',
+  base: '/',
   output: 'static',
 });

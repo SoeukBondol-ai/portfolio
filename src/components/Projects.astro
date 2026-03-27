@@ -1,4 +1,6 @@
 ---
+const BASE_URL = import.meta.env.BASE_URL;
+
 const projects = [
   {
     num: '001',
@@ -8,7 +10,7 @@ const projects = [
     detail: 'Custom CNN architecture · Data augmentation pipeline · Evaluated on real-world Khmer handwriting samples.',
     tags: ['Python', 'Deep Learning', 'CNN', 'OpenCV', 'OCR', 'Khmer NLP'],
     github: 'https://github.com/SoeukBondol-ai/khmer-number-recognition',
-    demo: '/portfolio/khmer',
+    demo: `${BASE_URL}khmer`,
     accent: 'amber',
     icon: 'ML',
     type: 'ML / Computer Vision',
@@ -21,7 +23,7 @@ const projects = [
     detail: 'U2Net · rembg · FastAPI · Docker · uv · HuggingFace Spaces.',
     tags: ['Python', 'U2Net', 'rembg', 'FastAPI', 'Docker', 'Computer Vision'],
     github: 'https://github.com/SoeukBondol-ai/bg-remover',
-    demo: '/portfolio/bgremover',
+    demo: `${BASE_URL}bgremover`,
     accent: 'blue',
     icon: 'BG',
     type: 'Computer Vision / API',
