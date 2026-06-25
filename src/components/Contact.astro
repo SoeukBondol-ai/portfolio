@@ -12,7 +12,7 @@
 
     <div class="contact-layout">
       <div class="cl reveal">
-        <h2 class="ct-big">
+        <h2 class="ct-big font-display">
           LET'S<br />
           <span class="stroke">BUILD</span><br />
           <em>SOMETHING.</em>
@@ -24,7 +24,7 @@
         </p>
         <a href="mailto:soeukbondolcc@gmail.com" class="email-cta">
           <span class="ec-label font-mono">Send me an email</span>
-          <span class="ec-addr">soeukbondolcc@gmail.com</span>
+          <span class="ec-addr font-mono">soeukbondolcc@gmail.com</span>
           <span class="ec-arrow">↗</span>
         </a>
       </div>
@@ -116,12 +116,13 @@
   .contact {
     position: relative;
     z-index: 1;
-    padding: 4rem 1.25rem 4.5rem;
+    padding: 5rem 1.5rem 5.5rem;
     border-top: 1px solid var(--border);
+    background: var(--bg);
   }
   @media (min-width: 640px) {
     .contact {
-      padding: 5.25rem 2rem 5.5rem;
+      padding: 6.5rem 2.5rem 7rem;
     }
   }
   .contact-inner {
@@ -132,34 +133,35 @@
   .contact-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
     align-items: start;
   }
   @media (min-width: 900px) {
     .contact-layout {
       grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
+      gap: 4.5rem;
     }
   }
 
   .ct-big {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(3.5rem, 9vw, 7.5rem);
-    line-height: 0.88;
+    font-size: clamp(3.2rem, 8.5vw, 6.2rem);
+    line-height: 0.9;
     margin-bottom: 1.75rem;
+    font-weight: 800;
+    color: var(--ink);
   }
   .stroke {
     color: transparent;
-    -webkit-text-stroke: 2px rgba(232, 234, 242, 0.25);
+    -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.12);
   }
   .ct-big em {
     color: var(--acid);
     font-style: normal;
   }
   .ct-desc {
-    font-size: 0.83rem;
+    font-size: 0.9rem;
     color: var(--muted);
-    line-height: 1.85;
+    line-height: 1.8;
     margin-bottom: 2.5rem;
     max-width: 420px;
   }
@@ -167,95 +169,104 @@
   .email-cta {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid rgba(200, 255, 87, 0.25);
-    border-radius: 8px;
-    background: rgba(200, 255, 87, 0.04);
+    gap: 0.45rem;
+    padding: 1.4rem 1.6rem;
+    border: 1px solid rgba(225, 29, 72, 0.15);
+    border-radius: 12px;
+    background: rgba(225, 29, 72, 0.03);
     text-decoration: none;
     transition:
-      background 0.2s,
-      border-color 0.2s;
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.25s ease;
     position: relative;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.02);
   }
   .email-cta:hover {
-    background: rgba(200, 255, 87, 0.08);
-    border-color: rgba(200, 255, 87, 0.5);
+    background-color: rgba(225, 29, 72, 0.06);
+    border-color: rgba(225, 29, 72, 0.35);
+    transform: translateY(-1px);
   }
   .ec-label {
-    font-size: 0.56rem;
+    font-size: 0.6rem;
+    font-weight: 600;
     color: var(--muted);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
   .ec-addr {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 600;
     color: var(--acid);
-    font-family: "JetBrains Mono", monospace;
   }
   .ec-arrow {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    top: 1.4rem;
+    right: 1.6rem;
     color: var(--acid);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
   }
 
   .socials {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
   }
   .soc {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.4rem;
     background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
     text-decoration: none;
     color: var(--ink);
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
   }
   .soc:hover {
-    border-color: rgba(200, 255, 87, 0.25);
+    border-color: rgba(15, 23, 42, 0.12);
     background: var(--lift);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
   }
   .soc-left {
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 1rem;
   }
   .soc-ico {
-    width: 36px;
-    height: 36px;
-    background: var(--lift);
-    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+    background: var(--dim);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--muted);
-    transition: color 0.2s;
+    transition: color 0.2s ease, background-color 0.2s ease;
   }
   .soc:hover .soc-ico {
     color: var(--acid);
+    background-color: rgba(225, 29, 72, 0.05);
   }
   .soc-name {
-    font-size: 0.75rem;
-    font-weight: 500;
-    margin-bottom: 0.18rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
   }
   .soc-sub {
-    font-size: 0.58rem;
+    font-size: 0.65rem;
     color: var(--muted);
   }
   .soc-arr {
     color: var(--muted);
     transition:
-      color 0.2s,
-      transform 0.2s;
+      color 0.2s ease,
+      transform 0.2s ease;
   }
   .soc:hover .soc-arr {
     color: var(--acid);
@@ -264,17 +275,18 @@
 
   .avail {
     background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
   }
   .avail-top {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.85rem 1.1rem;
+    padding: 0.9rem 1.3rem;
     border-bottom: 1px solid var(--border);
-    background: rgba(200, 255, 87, 0.04);
+    background: rgba(225, 29, 72, 0.03);
   }
   .avail-dot {
     width: 7px;
@@ -284,16 +296,17 @@
     animation: pulse 2s ease infinite;
   }
   .avail-status {
-    font-size: 0.6rem;
+    font-size: 0.62rem;
+    font-weight: 600;
     color: var(--acid);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
   .avail-details {
-    padding: 1rem 1.1rem;
+    padding: 1.1rem 1.3rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
   .ad-row {
     display: flex;
@@ -301,17 +314,20 @@
     align-items: baseline;
   }
   .adk {
-    font-size: 0.56rem;
+    font-size: 0.6rem;
+    font-weight: 600;
     color: var(--muted);
     width: 64px;
     flex-shrink: 0;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
   }
   .adv {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
+    font-weight: 500;
     color: var(--ink);
   }
   .adv.acid {
     color: var(--acid);
+    font-weight: 600;
   }
 </style>

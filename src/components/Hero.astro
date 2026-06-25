@@ -1,22 +1,17 @@
 ---
-
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <section class="hero">
-  <div class="scanline" aria-hidden="true"></div>
-  <div class="bracket tl" aria-hidden="true"></div>
-  <div class="bracket tr" aria-hidden="true"></div>
-  <div class="bracket bl" aria-hidden="true"></div>
-  <div class="bracket br" aria-hidden="true"></div>
-  <div class="hero-ghost" aria-hidden="true">DS</div>
+  <!-- Interactive Floating Background -->
+  <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
 
   <div class="hero-inner">
     <div class="hero-left">
       <div class="status-bar">
         <span class="status-dot"></span>
         <span
-          class="font-mono"
-          style="font-size:0.6rem;color:var(--muted);letter-spacing:0.12em"
+          class="status-text font-mono"
         >
           SOEUK BONDOL — DATA SCIENTIST — CAMBODIA
         </span>
@@ -24,7 +19,7 @@
 
       <h1 class="name">
         <span class="name-first">SOEUK</span>
-        <span class="name-last">BONDOL<span class="name-cursor">_</span></span>
+        <span class="name-last">BONDOL<span class="name-cursor">.</span></span>
       </h1>
 
       <div class="role-row">
@@ -49,7 +44,7 @@
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+            stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
           >
           View Projects
         </a>
@@ -76,7 +71,7 @@
         <span class="ph-title font-mono">sys.profile()</span>
         <span class="ph-badge font-mono">LIVE</span>
       </div>
-      <div class="panel-body font-mono">
+      <div class="panel-body">
         <div class="pb-row">
           <span class="pb-key">role</span><span class="pb-val amber"
             >Data Scientist</span
@@ -99,48 +94,48 @@
         </div>
         <div class="pb-row"><span class="pb-row-sep"></span></div>
         <div class="pb-row">
-          <span class="pb-key">projects</span><span class="pb-val" id="pCount"
+          <span class="pb-key">projects</span><span class="pb-val font-mono" id="pCount"
             >0</span
           >
         </div>
         <div class="pb-row">
-          <span class="pb-key">commits</span><span class="pb-val">∞</span>
+          <span class="pb-key">commits</span><span class="pb-val font-mono">∞</span>
         </div>
         <div class="pb-row">
-          <span class="pb-key">mouse_use</span><span class="pb-val amber"
+          <span class="pb-key">mouse_use</span><span class="pb-val font-mono amber"
             >0ms</span
           >
         </div>
         <div class="pb-row"><span class="pb-row-sep"></span></div>
-        <div class="pb-chart-label">skill_index[]</div>
+        <div class="pb-chart-label font-mono">skill_index[]</div>
         <div class="pb-chart">
           <div class="pbc-item">
-            <span class="pbc-l">Python</span>
+            <span class="pbc-l font-mono">Python</span>
             <div class="pbc-track">
               <div class="pbc-fill amber-fill" data-w="93"></div>
             </div>
-            <span class="pbc-n">93</span>
+            <span class="pbc-n font-mono">93</span>
           </div>
           <div class="pbc-item">
-            <span class="pbc-l">ML/DL</span>
+            <span class="pbc-l font-mono">ML/DL</span>
             <div class="pbc-track">
               <div class="pbc-fill cyan-fill" data-w="80"></div>
             </div>
-            <span class="pbc-n">80</span>
+            <span class="pbc-n font-mono">80</span>
           </div>
           <div class="pbc-item">
-            <span class="pbc-l">SQL</span>
+            <span class="pbc-l font-mono">SQL</span>
             <div class="pbc-track">
               <div class="pbc-fill" data-w="76"></div>
             </div>
-            <span class="pbc-n">76</span>
+            <span class="pbc-n font-mono">76</span>
           </div>
           <div class="pbc-item">
-            <span class="pbc-l">DevOps</span>
+            <span class="pbc-l font-mono">DevOps</span>
             <div class="pbc-track">
               <div class="pbc-fill violet-fill" data-w="70"></div>
             </div>
-            <span class="pbc-n">70</span>
+            <span class="pbc-n font-mono">70</span>
           </div>
         </div>
       </div>
@@ -181,120 +176,30 @@
   .hero {
     position: relative;
     z-index: 1;
-    min-height: 92vh;
+    min-height: 94vh;
     display: flex;
     flex-direction: column;
-    padding-top: 60px;
+    padding-top: 80px;
     overflow: hidden;
+    background: var(--bg);
   }
 
-  .scanline {
+  .hero-canvas {
     position: absolute;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(240, 180, 41, 0.2),
-      transparent
-    );
-    animation: scanH 10s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .bracket {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    z-index: 2;
-  }
-  .bracket::before,
-  .bracket::after {
-    content: "";
-    position: absolute;
-    background: var(--acid);
-  }
-  .bracket::before {
-    width: 1px;
-    height: 100%;
-  }
-  .bracket::after {
+    inset: 0;
     width: 100%;
-    height: 1px;
-  }
-  .tl {
-    top: 80px;
-    left: 20px;
-  }
-  .tl::before {
-    top: 0;
-    left: 0;
-  }
-  .tl::after {
-    top: 0;
-    left: 0;
-  }
-  .tr {
-    top: 80px;
-    right: 20px;
-  }
-  .tr::before {
-    top: 0;
-    right: 0;
-  }
-  .tr::after {
-    top: 0;
-    right: 0;
-  }
-  .bl {
-    bottom: 60px;
-    left: 20px;
-  }
-  .bl::before {
-    bottom: 0;
-    left: 0;
-  }
-  .bl::after {
-    bottom: 0;
-    left: 0;
-  }
-  .br {
-    bottom: 60px;
-    right: 20px;
-  }
-  .br::before {
-    bottom: 0;
-    right: 0;
-  }
-  .br::after {
-    bottom: 0;
-    right: 0;
-  }
-
-  .hero-ghost {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -52%);
-    font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(14rem, 32vw, 30rem);
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
+    height: 100%;
+    z-index: 0;
     pointer-events: none;
-    user-select: none;
-    white-space: nowrap;
-    letter-spacing: -0.02em;
   }
 
   .hero-inner {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
     align-items: center;
-    padding: 2.2rem 1.25rem 1.5rem;
+    padding: 3rem 1.5rem 2rem;
     position: relative;
     z-index: 2;
     max-width: 1200px;
@@ -303,9 +208,9 @@
   }
   @media (min-width: 900px) {
     .hero-inner {
-      grid-template-columns: 1fr 500px;
-      padding: 3rem 2rem 2rem;
-      gap: 3rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      padding: 4rem 2.5rem 3rem;
+      gap: 4rem;
     }
   }
 
@@ -313,7 +218,7 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    margin-bottom: 1.3rem;
+    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.5s 0.1s ease forwards;
   }
@@ -325,12 +230,19 @@
     animation: pulse 2s ease infinite;
     flex-shrink: 0;
   }
+  .status-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
 
   .name {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(4.5rem, 13vw, 11rem);
-    line-height: 0.88;
-    letter-spacing: 0.01em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.2rem, 9.5vw, 6.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.6s 0.2s ease forwards;
@@ -341,17 +253,10 @@
   }
   .name-last {
     display: block;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--acid);
-  }
-  @media (max-width: 480px) {
-    .name-last {
-      -webkit-text-stroke: 1.5px var(--acid);
-    }
+    color: var(--acid);
   }
   .name-cursor {
     color: var(--acid);
-    -webkit-text-stroke: 0;
     animation: pulse 1s step-end infinite;
   }
 
@@ -360,42 +265,43 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
     opacity: 0;
     animation: fadeUp 0.6s 0.3s ease forwards;
   }
   .role-tag {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    padding: 0.28rem 0.7rem;
-    border-radius: 3px;
-    border: 1px solid rgba(240, 180, 41, 0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(225, 29, 72, 0.12);
     color: var(--acid);
-    background: rgba(240, 180, 41, 0.08);
+    background: rgba(225, 29, 72, 0.03);
   }
   .role-tag.blue {
-    border-color: rgba(77, 157, 224, 0.3);
+    border-color: rgba(37, 99, 235, 0.12);
     color: var(--blue);
-    background: rgba(77, 157, 224, 0.08);
+    background: rgba(37, 99, 235, 0.03);
   }
   .role-tag.violet {
-    border-color: rgba(167, 139, 250, 0.3);
+    border-color: rgba(124, 58, 237, 0.12);
     color: var(--violet);
-    background: rgba(167, 139, 250, 0.08);
+    background: rgba(124, 58, 237, 0.03);
   }
   .role-sep {
-    color: var(--muted);
-    font-size: 0.7rem;
+    color: var(--border2);
+    font-size: 0.8rem;
   }
 
   .tagline {
-    font-size: clamp(0.78rem, 1.4vw, 0.92rem);
-    line-height: 1.85;
+    font-size: clamp(1rem, 1.6vw, 1.18rem);
+    line-height: 1.8;
     color: var(--muted);
     margin-bottom: 2.5rem;
-    max-width: 500px;
+    max-width: 540px;
     opacity: 0;
     animation: fadeUp 0.6s 0.4s ease forwards;
   }
@@ -403,7 +309,7 @@
   .cta-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.85rem;
     align-items: center;
     opacity: 0;
     animation: fadeUp 0.6s 0.5s ease forwards;
@@ -411,92 +317,111 @@
   .cta-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.4rem;
-    background: var(--acid);
-    color: #000;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.67rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    gap: 0.6rem;
+    padding: 0.95rem 1.85rem;
+    background: var(--ink);
+    color: #ffffff;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     transition:
-      opacity 0.2s,
-      transform 0.2s;
+      background-color 0.2s,
+      transform 0.2s,
+      box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
   }
   .cta-primary:hover {
-    opacity: 0.85;
+    background: var(--acid);
     transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.25);
   }
   .cta-ghost {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.4rem;
+    gap: 0.6rem;
+    padding: 0.95rem 1.85rem;
     color: var(--muted);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.67rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     text-decoration: none;
     border: 1px solid var(--border2);
-    border-radius: 5px;
+    border-radius: 8px;
     transition:
       border-color 0.2s,
-      color 0.2s;
+      color 0.2s,
+      background-color 0.2s,
+      transform 0.2s;
   }
   .cta-ghost:hover {
-    border-color: var(--acid);
-    color: var(--acid);
+    border-color: var(--ink);
+    color: var(--ink);
+    background-color: rgba(15, 23, 42, 0.02);
+    transform: translateY(-1px);
   }
   .cta-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--border2);
-    border-radius: 5px;
+    border-radius: 8px;
     color: var(--muted);
     text-decoration: none;
     transition:
       border-color 0.2s,
-      color 0.2s;
+      color 0.2s,
+      background-color 0.2s,
+      transform 0.2s;
   }
   .cta-icon:hover {
-    border-color: var(--acid);
-    color: var(--acid);
+    border-color: var(--ink);
+    color: var(--ink);
+    background-color: rgba(15, 23, 42, 0.02);
+    transform: translateY(-1px);
   }
 
-  /* Panel */
+  /* Scientific Profile Card */
   .hero-panel {
     background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
     overflow: hidden;
     opacity: 0;
-    animation: fadeIn 0.8s 0.7s ease forwards;
+    animation: fadeIn 0.8s 0.6s ease forwards;
     box-shadow:
-      0 0 0 1px rgba(240, 180, 41, 0.06),
-      0 24px 60px rgba(0, 0, 0, 0.4);
+      0 10px 30px -10px rgba(15, 23, 42, 0.06),
+      0 1px 3px rgba(15, 23, 42, 0.02),
+      0 30px 60px -15px rgba(15, 23, 42, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hero-panel:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 35px -10px rgba(15, 23, 42, 0.08),
+      0 1px 4px rgba(15, 23, 42, 0.03),
+      0 35px 70px -15px rgba(15, 23, 42, 0.06);
   }
   .panel-header {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.85rem 1.25rem;
+    padding: 0.95rem 1.4rem;
     border-bottom: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.025);
+    background: rgba(15, 23, 42, 0.015);
   }
   .ph-dots {
     display: flex;
     gap: 0.4rem;
   }
   .ph-dots span {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
   }
   .ph-dots span:nth-child(1) {
@@ -509,39 +434,46 @@
     background: #28c840;
   }
   .ph-title {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 600;
     color: var(--muted);
     margin-left: 0.5rem;
     flex: 1;
+    letter-spacing: 0.02em;
   }
   .ph-badge {
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     color: var(--acid);
-    border: 1px solid rgba(240, 180, 41, 0.35);
-    padding: 0.15rem 0.45rem;
-    border-radius: 2px;
-    background: rgba(240, 180, 41, 0.08);
+    border: 1px solid rgba(225, 29, 72, 0.2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(225, 29, 72, 0.04);
   }
 
   .panel-body {
-    padding: 1.5rem 1.75rem 1.75rem;
+    padding: 1.6rem 1.8rem;
   }
   .pb-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.75rem;
   }
   .pb-key {
-    font-size: 0.75rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--muted);
     width: 90px;
     flex-shrink: 0;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
   .pb-val {
-    font-size: 0.78rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--ink);
   }
   .pb-val.amber {
@@ -554,29 +486,31 @@
     flex: 1;
     height: 1px;
     background: var(--border);
-    margin: 0.35rem 0;
+    margin: 0.4rem 0;
   }
 
   .pb-chart-label {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--muted);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    margin-top: 0.4rem;
+    margin-bottom: 0.95rem;
+    margin-top: 0.8rem;
   }
   .pb-chart {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
   .pbc-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
   .pbc-l {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
+    font-weight: 600;
     color: var(--muted);
     width: 62px;
     flex-shrink: 0;
@@ -584,7 +518,7 @@
   .pbc-track {
     flex: 1;
     height: 6px;
-    background: var(--border);
+    background: var(--dim);
     border-radius: 3px;
     overflow: hidden;
   }
@@ -593,28 +527,31 @@
     border-radius: 3px;
     background: var(--muted);
     width: 0;
-    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .amber-fill {
-    background: var(--acid);
+    background: linear-gradient(90deg, var(--acid), #ff4d73);
   }
   .cyan-fill {
-    background: var(--cyan);
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
   }
   .violet-fill {
-    background: var(--violet);
+    background: linear-gradient(90deg, var(--violet), #9d66ff);
   }
   .pbc-n {
-    font-size: 0.66rem;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--muted);
     width: 24px;
     text-align: right;
   }
 
+  /* Marquee Ribbon */
   .ticker {
     border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     overflow: hidden;
-    padding: 0.85rem 0;
+    padding: 0.95rem 0;
     background: var(--bg2);
     position: relative;
     z-index: 2;
@@ -622,14 +559,15 @@
   .ticker-track {
     display: flex;
     white-space: nowrap;
-    animation: ticker 28s linear infinite;
+    animation: ticker 32s linear infinite;
   }
   .ticker-track span {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     color: var(--muted);
-    padding: 0 1.5rem;
+    padding: 0 1.75rem;
   }
   .ticker-track span.ta {
     color: var(--acid);
@@ -637,15 +575,7 @@
 </style>
 
 <script>
-  var pc = document.getElementById("pCount");
-  if (pc) {
-    var v = 0;
-    var iv = setInterval(function () {
-      v++;
-      pc.textContent = String(v);
-      if (v >= 4) clearInterval(iv);
-    }, 180);
-  }
+  // Skill chart trigger
   var panel = document.querySelector(".hero-panel");
   if (panel) {
     var io = new IntersectionObserver(
@@ -660,5 +590,129 @@
       { threshold: 0.3 },
     );
     io.observe(panel);
+  }
+
+  // Project count counter animation
+  var pc = document.getElementById("pCount");
+  if (pc) {
+    var v = 0;
+    var iv = setInterval(function () {
+      v++;
+      pc.textContent = String(v);
+      if (v >= 4) clearInterval(iv);
+    }, 180);
+  }
+
+  // High-performance interactive particle canvas
+  const canvas = document.getElementById("hero-canvas");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let w = (canvas.width = canvas.offsetWidth);
+    let h = (canvas.height = canvas.offsetHeight);
+
+    const particles = [];
+    const count = Math.min(45, Math.floor((w * h) / 28000));
+
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 2 + 1,
+        color: Math.random() > 0.65 ? "rgba(225, 29, 72, 0.09)" : "rgba(15, 23, 42, 0.04)"
+      });
+    }
+
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+
+    window.addEventListener("mousemove", function (e) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.targetX = e.clientX - rect.left;
+      mouse.targetY = e.clientY - rect.top;
+    });
+
+    window.addEventListener("mouseleave", function () {
+      mouse.targetX = -1000;
+      mouse.targetY = -1000;
+    });
+
+    let resizeTimeout;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function () {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+      }, 150);
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Ease mouse coordinates
+      if (mouse.targetX > -1000) {
+        if (mouse.x === -1000) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        } else {
+          mouse.x += (mouse.targetX - mouse.x) * 0.1;
+          mouse.y += (mouse.targetY - mouse.y) * 0.1;
+        }
+      } else {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      }
+
+      // Update & Draw particles
+      particles.forEach(function (p) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Boundary wrap
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        // Mouse interaction (repel)
+        if (mouse.x > -1000) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            const force = (120 - dist) / 120;
+            const angle = Math.atan2(dy, dx);
+            p.x += Math.cos(angle) * force * 1.8;
+            p.y += Math.sin(angle) * force * 1.8;
+          }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      });
+
+      // Connect close particles with lines
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.015)";
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   }
 </script>
