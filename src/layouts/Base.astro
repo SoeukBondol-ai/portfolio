@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title?: string;
   desc?: string;
@@ -15,9 +17,62 @@ const BASE_URL = import.meta.env.BASE_URL;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Soeuk Bondol" />
+    <meta name="keywords" content="Soeuk Bondol, Data Scientist, Machine Learning Engineer, MLOps, Data Engineer, Cambodia, Phnom Penh, Apache Kafka, PySpark, Apache Airflow, Python Developer, OCR, Computer Vision" />
     <meta name="description" content={desc} />
+    <meta name="google-site-verification" content="wM6ZnFf_D6oYh0RSiJ9cFPk5dM5f4VPjMg5lvV1qupc" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:site_name" content="Soeuk Bondol Portfolio" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={desc} />
+
     <title>{title}</title>
     <link rel="icon" href={`${BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link rel="sitemap" href={`${BASE_URL}sitemap-index.xml`} />
+
+    <!-- Google Search Console Rich Results: JSON-LD Person Schema -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Soeuk Bondol",
+        "jobTitle": "Data Scientist & Machine Learning Engineer",
+        "description": "Data Scientist and Machine Learning Engineer specializing in distributed real-time data streaming pipelines, MLOps, Computer Vision, and OCR systems in Phnom Penh, Cambodia.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Phnom Penh",
+          "addressCountry": "Cambodia"
+        },
+        "url": "https://github.com/SoeukBondol-ai",
+        "sameAs": [
+          "https://github.com/SoeukBondol-ai"
+        ],
+        "knowsAbout": [
+          "Data Science",
+          "Machine Learning",
+          "MLOps",
+          "Data Engineering",
+          "Apache Kafka",
+          "PySpark",
+          "Apache Airflow",
+          "PostgreSQL",
+          "FastAPI",
+          "Python",
+          "Docker",
+          "Computer Vision",
+          "OCR",
+          "React"
+        ]
+      }
+    </script>
   </head>
   <body>
     <slot />
@@ -37,6 +92,4 @@ const BASE_URL = import.meta.env.BASE_URL;
     </script>
   </body>
 </html>
-<style is:global>
-  @import "../styles/global.css";
-</style>
+

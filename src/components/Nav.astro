@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 <nav id="nav">
   <a href={BASE_URL} class="logo">
-    <span class="logo-bracket">[</span>SB<span class="logo-bracket">]</span>
+    SB<span class="logo-dot">.</span>
   </a>
 
   <ul class="links">
@@ -30,9 +30,9 @@ const BASE_URL = import.meta.env.BASE_URL;
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 1.5rem;
-    background: rgba(13, 17, 23, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--border);
   }
   @media (min-width: 640px) {
@@ -42,14 +42,14 @@ const BASE_URL = import.meta.env.BASE_URL;
   }
 
   .logo {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: var(--ink);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.01em;
   }
-  .logo-bracket {
+  .logo-dot {
     color: var(--acid);
   }
 
@@ -59,13 +59,14 @@ const BASE_URL = import.meta.env.BASE_URL;
     list-style: none;
   }
   .links a {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.63rem;
-    letter-spacing: 0.12em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
   }
   .links a:hover {
     color: var(--acid);
@@ -80,23 +81,26 @@ const BASE_URL = import.meta.env.BASE_URL;
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     color: var(--acid);
     text-decoration: none;
-    border: 1px solid rgba(240, 180, 41, 0.3);
+    border: 1px solid rgba(225, 29, 72, 0.15);
     border-radius: 20px;
     padding: 0.35rem 0.85rem;
-    background: rgba(240, 180, 41, 0.07);
+    background: rgba(225, 29, 72, 0.04);
     transition:
-      background 0.2s,
-      border-color 0.2s;
+      background 0.25s,
+      border-color 0.25s,
+      transform 0.2s;
   }
   .hire:hover {
-    background: rgba(240, 180, 41, 0.15);
-    border-color: rgba(240, 180, 41, 0.6);
+    background: rgba(225, 29, 72, 0.08);
+    border-color: rgba(225, 29, 72, 0.35);
+    transform: translateY(-1px);
   }
   .hire-dot {
     width: 6px;

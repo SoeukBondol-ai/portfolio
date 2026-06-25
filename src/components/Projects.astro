@@ -17,51 +17,50 @@ const projects = [
   },
   {
     num: '002',
-    title: 'Background Remover',
-    short: 'Computer Vision · API',
-    desc: 'AI-powered background removal using U2Net. Upload any image — people, products, animals — and get a transparent PNG back instantly. Deployed on Hugging Face Spaces via FastAPI + Docker.',
-    detail: 'U2Net · rembg · FastAPI · Docker · uv · HuggingFace Spaces.',
-    tags: ['Python', 'U2Net', 'rembg', 'FastAPI', 'Docker', 'Computer Vision'],
-    github: 'https://github.com/SoeukBondol-ai/bg-remover',
-    demo: `${BASE_URL}bgremover`,
+    title: 'Real-Time GDELT Trends Analytics',
+    short: 'Data Engineering · Event Streaming',
+    desc: 'A high-throughput analytical pipeline processing the global GDELT event stream in real time. Ingests live telemetry streams, aggregates geopolitical sentiment windows, and orchestrates daily workflow tasks.',
+    detail: 'GDELT Live Streams → Apache Kafka → PySpark Streaming → PostgreSQL → Apache Airflow → FastAPI',
+    tags: ['Apache Kafka', 'PySpark', 'Apache Airflow', 'PostgreSQL', 'FastAPI', 'Python'],
+    github: 'https://github.com/SoeukBondol-ai/Real-Time-GDELT-Trends-Analytics',
+    demo: null,
     accent: 'blue',
-    icon: 'BG',
-    type: 'Computer Vision / API',
+    icon: 'DE',
+    type: 'Data Engineering / Streaming',
   },
   {
     num: '003',
-    title: 'Grabbit',
-    short: 'Tooling · Automation',
-    desc: 'A fast command-line scraping and data-grabbing tool. Built for developers who need to pull structured data quickly without writing boilerplate. Clean CLI, clean output.',
-    detail: 'CLI-first design · Structured output (JSON/CSV) · Configurable rules · Lightweight dependency tree.',
-    tags: ['Python', 'CLI', 'Scraping', 'Automation', 'Data Pipeline'],
-    github: 'https://github.com/SoeukBondol-ai/grabbit',
+    title: 'Stock Streaming Analytics',
+    short: 'Data Engineering · Real-Time Dashboard',
+    desc: 'An end-to-end financial streaming and analytical pipeline. Ingests live market data, processes streaming window metrics, stores structured multi-layer data tables, and serves instant API metrics.',
+    detail: 'Stock APIs → Kafka Producer → Apache Kafka → PySpark Streaming → PostgreSQL (Bronze/Silver/Gold) → FastAPI → React Dashboard',
+    tags: ['Kafka', 'PySpark', 'PostgreSQL', 'FastAPI', 'React', 'Data Pipeline'],
+    github: 'https://github.com/SoeukBondol-ai/stock-streaming-analytics',
     demo: null,
     accent: 'violet',
-    icon: 'CLI',
-    type: 'Tooling / Automation',
+    icon: 'FIN',
+    type: 'Data Engineering / Finance',
   },
   {
     num: '004',
-    title: 'Coming Soon',
-    short: 'In Development',
-    desc: 'The next project is brewing. Something at the intersection of data engineering and ML infrastructure — watch this space.',
-    detail: null,
-    tags: ['Python', 'ML', 'Data Engineering'],
-    github: null,
+    title: 'KhmerDoc-Ai',
+    short: 'Document AI · Hierarchical Layout · RAG',
+    desc: 'An advanced intelligent document processing (IDP) and layout-aware retrieval system for low-resource Khmer business documents. Implements hierarchical fine-grained layout analysis inspired by the KH-FUNSD dataset (APSIPA 2025) to parse complex structures, extract structured JSON schemas, and enable highly accurate semantic RAG search.',
+    detail: 'APSIPA 2025 Paper Implementation (KH-FUNSD) · Hierarchical Khmer document parsing · Complex JSON tree extraction · Semantic chunking & layout-aware RAG vector search.',
+    tags: ['Python', 'Document AI', 'RAG', 'Layout Analysis', 'KH-FUNSD', 'Vector DB', 'Khmer NLP'],
+    github: 'https://github.com/SoeukBondol-ai/KhmerDoc-Ai',
     demo: null,
-    accent: 'dim',
-    icon: '⟳',
-    type: 'TBD',
+    accent: 'rose',
+    icon: 'RAG',
+    type: 'Research / Document AI',
   },
 ];
 
 const accentMap: Record<string,string> = {
-  amber:  '#f0b429',
-  blue:   '#4d9de0',
-  cyan:   '#38d9f5',
-  violet: '#8b5cf6',
-  dim:    '#2a2d40',
+  amber:  '#d97706', // Rich amber
+  blue:   '#2563eb', // Royal blue
+  violet: '#7c3aed', // Slate violet
+  rose:   '#e11d48', // Cherry red
 };
 ---
 
@@ -74,13 +73,13 @@ const accentMap: Record<string,string> = {
     </div>
 
     <div class="ph reveal">
-      <h2 class="ph-title">
+      <h2 class="ph-title font-display">
         <span>THINGS I'VE</span>
         <span class="ph-title-accent">SHIPPED.</span>
       </h2>
       <p class="ph-sub">
-        From Khmer NLP to auth microservices —<br/>
-        real problems, real code, real impact.
+        From Document AI and research papers to real-time distributed streaming —<br/>
+        production-grade architectures, clean code, engineered with scientific intent.
       </p>
     </div>
 
@@ -92,7 +91,7 @@ const accentMap: Record<string,string> = {
             <span class="cf-num font-mono">{p.num}</span>
             <span class="cf-type font-mono">{p.type}</span>
           </div>
-          <h3 class="cf-title">{p.title}</h3>
+          <h3 class="cf-title font-display">{p.title}</h3>
           <p class="cf-desc">{p.desc}</p>
           {p.detail && <p class="cf-detail font-mono">{p.detail}</p>}
           <div class="cf-tags">
@@ -101,7 +100,7 @@ const accentMap: Record<string,string> = {
           <div class="cf-link-row">
             {p.demo && (
               <a href={p.demo} class="cf-link cf-link-demo">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 Try Live Demo
               </a>
             )}
@@ -114,7 +113,7 @@ const accentMap: Record<string,string> = {
           </div>
         </div>
 
-        <!-- right: decorative code block -->
+        <!-- right: decorative light code block (CNN for OCR) -->
         <div class="cf-right">
           <div class="code-win">
             <div class="cw-bar">
@@ -145,31 +144,26 @@ const accentMap: Record<string,string> = {
       </article>
     ))}
 
-    <!-- 3-col grid for the rest -->
+    <!-- 3-col grid for the other 3 -->
     <div class="cards-grid">
       {projects.slice(1).map((p, i) => (
-        <article class={`card-sm reveal ${p.accent === 'dim' ? 'card-dim' : ''}`} style={`--ac:${accentMap[p.accent]};transition-delay:${i*0.08}s`}>
+        <article class="card-sm reveal" style={`--ac:${accentMap[p.accent]};transition-delay:${i*0.08}s`}>
           <div class="cs-top">
             <span class="cs-num font-mono">{p.num}</span>
-            <span class="cs-icon">{p.icon}</span>
+            <span class="cs-icon font-mono">{p.icon}</span>
           </div>
           <span class="cs-type font-mono">{p.type}</span>
-          <h3 class="cs-title">{p.title}</h3>
+          <h3 class="cs-title font-display">{p.title}</h3>
           <p class="cs-desc">{p.desc}</p>
+          {p.detail && <p class="cs-detail font-mono">{p.detail}</p>}
           <div class="cs-tags">
             {p.tags.map(t => <span class="ptag">{t}</span>)}
           </div>
-          {p.demo ? (
-            <a href={p.demo} class="cs-link cs-link-demo">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Try Live Demo
-            </a>
-          ) : p.github ? (
+          {p.github && (
             <a href={p.github} target="_blank" rel="noopener" class="cs-link cs-link-gh">
-              GitHub
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.3rem;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub Project ↗
             </a>
-          ) : (
-            <span class="cs-wip font-mono">In Progress…</span>
           )}
         </article>
       ))}
@@ -178,165 +172,390 @@ const accentMap: Record<string,string> = {
 </section>
 
 <style>
-.projects { position:relative; z-index:1; padding: 4rem 1.25rem; border-top: 1px solid var(--border); }
-@media(min-width:640px){ .projects{ padding: 5.25rem 2rem; } }
-.projects-inner { max-width: 1200px; margin: 0 auto; }
+  .projects {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  @media(min-width:640px){
+    .projects {
+      padding: 6.5rem 2.5rem;
+    }
+  }
+  .projects-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-.ph { margin-bottom: 2.25rem; }
-.ph-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: 0.86; margin-bottom: 0.7rem;
-  display: inline-flex; flex-direction: column; align-items: flex-start;
-}
-.ph-title-accent { color: var(--acid); font-style: normal; }
-.ph-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.75; }
+  .ph {
+    margin-bottom: 3.5rem;
+  }
+  .ph-title {
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--ink);
+  }
+  .ph-title-accent {
+    color: var(--acid);
+    font-style: normal;
+  }
+  .ph-sub {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: var(--muted);
+    line-height: 1.8;
+  }
 
-/* FEATURED */
-.card-featured {
-  display: grid; grid-template-columns: 1fr;
-  background: var(--surface); border: 1px solid var(--border2);
-  border-radius: 12px; overflow: hidden; margin-bottom: 1.25rem;
-  transition: border-color 0.3s;
-  border-left: 3px solid var(--ac);
-}
-@media(min-width:760px){ .card-featured{ grid-template-columns: 1fr 1fr; } }
-.card-featured:hover { border-color: color-mix(in srgb, var(--ac) 40%, var(--border2)); }
+  /* FEATURED CARD */
+  .card-featured {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border-left: 4px solid var(--ac);
+    box-shadow:
+      0 10px 30px -10px rgba(15, 23, 42, 0.05),
+      0 1px 3px rgba(15, 23, 42, 0.02);
+  }
+  @media(min-width:900px){
+    .card-featured {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+  }
+  .card-featured:hover {
+    border-color: rgba(15, 23, 42, 0.12);
+    transform: translateY(-2px);
+    box-shadow:
+      0 20px 40px -15px rgba(15, 23, 42, 0.08),
+      0 1px 4px rgba(15, 23, 42, 0.03);
+  }
 
-.cf-left { padding: 2rem; display: flex; flex-direction: column; }
-.cf-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-.cf-num  { font-size: 0.6rem; color: var(--ac); letter-spacing: 0.1em; }
-.cf-type { font-size: 0.56rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-.cf-icon {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
-  color: var(--ac); border: 1px solid color-mix(in srgb, var(--ac) 26%, transparent);
-  background: color-mix(in srgb, var(--ac) 8%, transparent);
-  border-radius: 4px; padding: 0.2rem 0.45rem; display: inline-block; margin-bottom: 1rem;
-}
-.cf-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem);
-  line-height: 0.95; color: var(--ac); margin-bottom: 0.9rem;
-}
-.cf-desc   { font-size: 0.78rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; flex:1; }
-.cf-detail { font-size: 0.6rem; color: var(--muted); opacity: 0.6; line-height: 1.6; margin-bottom: 1.25rem; }
-.cf-tags   { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.75rem; }
-.cf-link-row { display:flex; gap:0.75rem; flex-wrap:wrap; }
-.cf-link {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.63rem;
-  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
-  padding: 0.55rem 1.1rem; border-radius: 4px; transition: all 0.2s;
-  align-self: flex-start;
-}
-.cf-link-demo {
-  background: var(--ac); color: #000; font-weight: 600;
-}
-.cf-link-demo:hover { opacity: 0.85; transform: translateY(-1px); }
-.cf-link-gh {
-  color: var(--ac); border: 1px solid color-mix(in srgb, var(--ac) 30%, transparent);
-  background: color-mix(in srgb, var(--ac) 6%, transparent);
-}
-.cf-link-gh:hover { background: color-mix(in srgb, var(--ac) 12%, transparent); }
+  .cf-left {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  @media(max-width:480px){
+    .cf-left {
+      padding: 1.6rem;
+    }
+  }
+  .cf-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .cf-num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ac);
+    letter-spacing: 0.08em;
+  }
+  .cf-type {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cf-title {
+    font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .cf-desc {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    flex: 1;
+  }
+  .cf-detail {
+    font-size: clamp(0.78rem, 1.2vw, 0.85rem);
+    color: var(--muted);
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+    border-left: 2px solid var(--border2);
+    padding-left: 0.8rem;
+  }
+  .cf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.2rem;
+  }
+  .cf-link-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .cf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .cf-link-demo {
+    background: var(--ac);
+    color: #ffffff;
+  }
+  .cf-link-demo:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--ac) 35%, transparent);
+  }
+  .cf-link-gh {
+    color: var(--ink);
+    border: 1px solid var(--border2);
+    background: rgba(15, 23, 42, 0.01);
+  }
+  .cf-link-gh:hover {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: var(--ink);
+    transform: translateY(-1px);
+  }
 
-/* code window */
-.cf-right {
-  background: var(--bg); border-left: 1px solid var(--border);
-  padding: 0; display: flex; flex-direction: column;
-}
-@media(max-width:759px){ .cf-right{ border-left:none; border-top:1px solid var(--border); } }
-.code-win { flex:1; display:flex; flex-direction:column; }
-.cw-bar {
-  display: flex; align-items: center; gap: 0.4rem;
-  padding: 0.6rem 1rem; border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,0.02);
-}
-.cw-d { width:9px; height:9px; border-radius:50%; }
-.cw-d.r{background:#ff5f57;} .cw-d.y{background:#febc2e;} .cw-d.g{background:#28c840;}
-.cw-title { font-size:0.58rem; color:var(--muted); margin-left: 0.4rem; }
-.cw-body {
-  flex:1; padding:1.5rem; font-size:0.67rem; line-height:1.8;
-  color: #8892b0; overflow: auto;
-}
-.ck  { color: #c792ea; }
-.cf2 { color: var(--acid); }
-.cv  { color: var(--cyan); }
-.cn  { color: #f78c6c; }
-.cc  { color: #546e7a; font-style: italic; }
+  /* CODE WINDOW (Light Mode VS Code Style) */
+  .cf-right {
+    background: #f8fafc;
+    border-left: 1px solid var(--border);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  @media(max-width:899px){
+    .cf-right {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+  }
+  .code-win {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .cw-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.015);
+  }
+  .cw-d {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .cw-d.r { background: #ff5f57; }
+  .cw-d.y { background: #febc2e; }
+  .cw-d.g { background: #28c840; }
+  .cw-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-left: 0.5rem;
+  }
+  .cw-body {
+    flex: 1;
+    padding: 2rem;
+    font-size: clamp(0.75rem, 1.2vw, 0.8rem);
+    line-height: 1.8;
+    color: #334155; /* Slate-700 */
+    overflow: auto;
+    background: #f8fafc;
+  }
+  
+  /* Paste-like Premium Syntax Fills */
+  .ck { color: #0550ae; font-weight: 600; } /* keywords (blue) */
+  .cf2 { color: #8250df; font-weight: 600; } /* classes/functions (purple) */
+  .cv { color: #953800; } /* variables (orange-brown) */
+  .cn { color: #cf222e; } /* numbers (red) */
+  .cc { color: #6e7781; font-style: italic; } /* comments (grey) */
 
-/* CARD GRID */
-.cards-grid {
-  display: grid; grid-template-columns: 1fr; gap: 1.25rem;
-}
-@media(min-width:640px)  { .cards-grid{ grid-template-columns: 1fr 1fr; } }
-@media(min-width:1000px) { .cards-grid{ grid-template-columns: repeat(3,1fr); } }
+  /* SMALL CARDS GRID (3-column layout for desktop) */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media(min-width:768px) {
+    .cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media(min-width:1024px) {
+    .cards-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 
-.card-sm {
-  background: var(--surface); border: 1px solid var(--border2); border-radius: 10px;
-  padding: 2rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
-  transition: border-color 0.25s, background 0.25s;
-  border-top: 2px solid var(--ac);
-}
-.card-sm::before {
-  content:''; position:absolute; inset:0; border-radius:10px; opacity:0; pointer-events:none;
-  background: radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--ac) 8%, transparent), transparent 60%);
-  transition: opacity 0.3s;
-}
-.card-sm:hover::before { opacity:1; }
-.card-sm:hover { border-color: color-mix(in srgb, var(--ac) 35%, var(--border2)); }
-.card-dim { border-top-color: var(--dim); opacity: 0.6; }
-.card-dim:hover { opacity: 0.8; }
+  .card-sm {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border-top: 4px solid var(--ac);
+    box-shadow:
+      0 8px 24px -8px rgba(15, 23, 42, 0.04),
+      0 1px 2px rgba(15, 23, 42, 0.01);
+  }
+  @media(max-width:480px){
+    .card-sm {
+      padding: 1.6rem;
+    }
+  }
+  .card-sm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--ac) 4%, transparent), transparent 75%);
+    transition: opacity 0.3s ease;
+  }
+  .card-sm:hover::before {
+    opacity: 1;
+  }
+  .card-sm:hover {
+    border-color: rgba(15, 23, 42, 0.12);
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 32px -12px rgba(15, 23, 42, 0.08),
+      0 1px 4px rgba(15, 23, 42, 0.02);
+  }
 
-.cs-top  { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; }
-.cs-num  { font-size:0.58rem; color:var(--ac); letter-spacing:0.1em; }
-.cs-icon {
-  font-family:'JetBrains Mono',monospace; font-size:0.56rem; color:var(--ac);
-  border:1px solid color-mix(in srgb, var(--ac) 24%, transparent);
-  background: color-mix(in srgb, var(--ac) 8%, transparent);
-  border-radius:3px; padding:0.12rem 0.36rem; letter-spacing:0.05em;
-}
-.cs-type { font-size:0.54rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.8rem; display:block; }
-.cs-title {
-  font-family:'Bebas Neue',sans-serif; font-size:1.75rem; color:var(--ac);
-  line-height:0.95; margin-bottom:0.7rem;
-}
-.cs-desc { font-size:0.72rem; color:var(--muted); line-height:1.75; margin-bottom:1.1rem; flex:1; }
-.cs-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:1.25rem; }
-.cs-link {
-  font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--ac);
-  text-decoration:none; letter-spacing:0.06em; text-transform:uppercase;
-  transition: all 0.2s; align-self:flex-start;
-}
-.cs-link-demo {
-  display:inline-flex; align-items:center; gap:0.45rem;
-  justify-content:center;
-  color:#000; background:var(--ac); padding:0.62rem 1rem;
-  border-radius:5px; border:1px solid transparent; font-weight:700;
-  width:100%;
-  letter-spacing:0.08em;
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--ac) 28%, transparent);
-}
-.cs-link-demo:hover {
-  opacity:0.92;
-  transform:translateY(-1px);
-  box-shadow: 0 12px 28px color-mix(in srgb, var(--ac) 34%, transparent);
-}
-.cs-link-gh {
-  display:inline-flex; align-items:center;
-  border:1px solid color-mix(in srgb, var(--ac) 30%, transparent);
-  background: color-mix(in srgb, var(--ac) 7%, transparent);
-  padding:0.5rem 0.9rem; border-radius:4px;
-}
-.cs-link-gh:hover {
-  background: color-mix(in srgb, var(--ac) 12%, transparent);
-}
-.cs-wip { font-size:0.6rem; color:var(--muted); letter-spacing:0.08em; }
+  .cs-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+  }
+  .cs-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ac);
+    letter-spacing: 0.08em;
+  }
+  .cs-icon {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--ac);
+    border: 1px solid color-mix(in srgb, var(--ac) 18%, transparent);
+    background: color-mix(in srgb, var(--ac) 3%, transparent);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.05em;
+  }
+  .cs-type {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+    display: block;
+  }
+  .cs-title {
+    font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .cs-desc {
+    font-size: clamp(0.88rem, 1.4vw, 0.95rem);
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    flex: 1;
+  }
+  .cs-detail {
+    font-size: clamp(0.72rem, 1.1vw, 0.78rem);
+    color: var(--muted);
+    opacity: 0.85;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    border-left: 2px solid var(--border2);
+    padding-left: 0.6rem;
+  }
+  .cs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.8rem;
+  }
+  .cs-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ac);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+  }
+  .cs-link-gh {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border2);
+    background: rgba(15, 23, 42, 0.01);
+    color: var(--ink);
+    padding: 0.65rem 1.2rem;
+    border-radius: 8px;
+    width: 100%;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: 700;
+  }
+  .cs-link-gh:hover {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: var(--ink);
+    color: var(--ac);
+    transform: translateY(-1px);
+  }
 
-/* shared tags */
-.ptag {
-  font-family:'JetBrains Mono',monospace; font-size:0.54rem; letter-spacing:0.05em;
-  padding:0.16rem 0.48rem; border-radius:3px; text-transform:uppercase;
-  background: color-mix(in srgb, var(--ac) 7%, transparent);
-  color: var(--ac);
-  border: 1px solid color-mix(in srgb, var(--ac) 16%, transparent);
-}
-.card-dim .ptag { --ac: var(--muted); }
+  /* TAGS SYSTEM */
+  .ptag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--ac) 4%, transparent);
+    color: var(--ac);
+    border: 1px solid color-mix(in srgb, var(--ac) 12%, transparent);
+  }
 </style>
