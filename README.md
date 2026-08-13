@@ -10,18 +10,24 @@ Built with Astro and Tailwind CSS. Deployed via GitHub Pages.
 
 - [Astro](https://astro.build) — static site framework
 - [Tailwind CSS](https://tailwindcss.com) — utility-first styling
-- Bebas Neue, DM Sans, JetBrains Mono — typography
+- Inter, Plus Jakarta Sans, JetBrains Mono — typography (self-hosted via Fontsource)
 
 ## Project Structure
 
 ```
 /
 ├── public/
+│   ├── asciinema/          # self-hosted asciinema-player (css + js)
+│   ├── recordings/         # portfolio.cast — terminal showcase recording
+│   ├── 404.html            # redirects wrong URLs to /portfolio/
 │   └── favicon.svg
+├── scripts/
+│   └── gen-terminal-cast.py  # regenerates public/recordings/portfolio.cast
 ├── src/
 │   ├── components/
 │   │   ├── Nav.astro
 │   │   ├── Hero.astro
+│   │   ├── Terminal.astro   # asciinema terminal showcase (like pi.dev)
 │   │   ├── Projects.astro
 │   │   ├── Stack.astro
 │   │   ├── Contact.astro
@@ -39,6 +45,24 @@ Built with Astro and Tailwind CSS. Deployed via GitHub Pages.
 ├── tailwind.config.mjs
 └── package.json
 ```
+
+## Terminal showcase
+
+The "Terminal" section plays a scripted terminal session (autoplay, looping) with
+[asciinema-player](https://github.com/asciinema/asciinema-player) — same idea as
+the pi.dev landing page. The player is self-hosted under `public/asciinema/` and
+the recording lives at `public/recordings/portfolio.cast` (`.cast` = JSON Lines:
+ANSI output + timestamps).
+
+To edit the demo (commands, timing, content), change
+`scripts/gen-terminal-cast.py` and regenerate:
+
+```bash
+python3 scripts/gen-terminal-cast.py
+```
+
+The theme is baked into the cast header so the terminal always matches the
+site's accent palette.
 
 ## Commands
 
