@@ -1,0 +1,235 @@
+---
+const BASE_URL = import.meta.env.BASE_URL;
+---
+
+<section class="terminal" id="terminal">
+  <div class="terminal-inner">
+    <div class="sec-eye reveal">
+      <span class="sec-eye-num">01</span>
+      <div class="sec-eye-line"></div>
+      <span class="sec-eye-txt">Terminal</span>
+    </div>
+
+    <div class="th reveal">
+      <h2 class="th-title font-display">
+        <span>MEET ME IN THE</span>
+        <span class="th-accent">TERMINAL.</span>
+      </h2>
+      <p class="th-sub">
+        A recording of how I actually work — profile, projects, training runs,
+        and the API behind it all.
+      </p>
+    </div>
+
+    <figure class="term-figure reveal">
+      <div
+        class="term-frame"
+        id="termMount"
+        aria-label="Terminal showcase recording"
+      ></div>
+      <figcaption class="term-caption">
+        <span class="tc-title font-mono">portfolio.cast — soeuk bondol</span>
+        <span class="tc-live font-mono"
+          ><span class="tc-dot"></span>recording</span
+        >
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .terminal {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  @media (min-width: 640px) {
+    .terminal {
+      padding: 6.5rem 2.5rem;
+    }
+  }
+  .terminal-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .th {
+    margin-bottom: 2.5rem;
+  }
+  .th-title {
+    font-size: clamp(2.4rem, 7vw, 4.8rem);
+    line-height: 1;
+    margin-bottom: 0.85rem;
+    color: var(--ink);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .th-accent {
+    color: var(--acid);
+  }
+  .th-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  /* ── pi.dev-style figure: terminal fills a fixed-aspect panel ── */
+  .term-figure {
+    width: min(100%, 60rem); /* 960px → terminal font ≈ 20px */
+    margin: 0 auto;
+  }
+  .term-frame {
+    position: relative;
+    width: 100%;
+    /* 80 cols × 0.6em : 24 rows × 1.45 line-height — player scales to fill */
+    aspect-ratio: 48 / 34.8;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #0d1117;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    box-shadow:
+      0 20px 50px -20px rgba(15, 23, 42, 0.25),
+      0 2px 8px rgba(15, 23, 42, 0.06);
+  }
+  .term-frame :global(.ap-wrapper) {
+    position: relative;
+  }
+  .term-frame :global(.ap-wrapper),
+  .term-frame :global(.ap-player) {
+    border-radius: inherit;
+  }
+  .term-frame :global(.ap-player) {
+    --term-font-family:
+      "JetBrains Mono", ui-monospace, "Cascadia Code", Menlo, monospace !important;
+  }
+
+  /* mobile: fixed readable font + swipe instead of shrinking */
+  @media (max-width: 767px) {
+    .term-frame {
+      aspect-ratio: auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border2) transparent;
+    }
+    .term-frame :global(.ap-wrapper) {
+      min-width: 620px;
+    }
+  }
+
+  .term-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0.25rem 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tc-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .tc-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--acid);
+    animation: tcBlink 1.25s steps(1, end) infinite;
+  }
+  @keyframes tcBlink {
+    0%,
+    55% {
+      opacity: 1;
+    }
+    56%,
+    100% {
+      opacity: 0.25;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var BASE_URL = import.meta.env.BASE_URL;
+    var mount = document.getElementById("termMount");
+    if (!mount) return;
+
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var isMobile = window.matchMedia("(max-width: 767px)");
+
+    function mountPlayer() {
+      // preserve playback position when re-creating across breakpoints
+      var saved = 0;
+      if (window.__termPlayer) {
+        try {
+          saved = window.__termPlayer.currentTime || 0;
+        } catch (e) {}
+        try {
+          window.__termPlayer.dispose();
+        } catch (e) {}
+        window.__termPlayer = null;
+      }
+
+      var opts = {
+        idleTimeLimit: 2,
+        autoPlay: !reduced,
+        controls: reduced,
+        loop: true,
+        preload: true,
+        speed: 1,
+        // desktop: smooth scale-to-fill (like pi.dev) · mobile: fixed readable font
+        fit: isMobile.matches ? "none" : "both",
+        terminalFontFamily:
+          '"JetBrains Mono", ui-monospace, "Cascadia Code", Menlo, monospace',
+        terminalLineHeight: 1.45,
+        theme: "auto/asciinema",
+      };
+      if (isMobile.matches) opts.terminalFontSize = 12;
+
+      window.__termPlayer = window.AsciinemaPlayer.create(
+        BASE_URL + "recordings/portfolio.cast",
+        mount,
+        opts,
+      );
+      if (saved > 1) {
+        var p = window.__termPlayer.seek(saved);
+        if (p && p.catch) p.catch(function () {});
+      }
+    }
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+
+        // lazy-load the player assets only when the section is visible
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = BASE_URL + "asciinema/asciinema-player.css";
+        document.head.appendChild(link);
+
+        var script = document.createElement("script");
+        script.src = BASE_URL + "asciinema/asciinema-player.min.js";
+        script.async = true;
+        script.onload = function () {
+          if (!window.AsciinemaPlayer) return;
+          mountPlayer();
+          isMobile.addEventListener("change", mountPlayer);
+        };
+        document.body.appendChild(script);
+      },
+      { threshold: 0.12 },
+    );
+    io.observe(mount);
+  })();
+</script>
